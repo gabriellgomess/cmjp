@@ -1,0 +1,11 @@
+a {
+  color: inherit; /* Herda a cor do elemento pai */
+  text-decoration: none; /* Remove o sublinhado */
+  cursor: pointer; /* Define o cursor para o padrão automático */
+  background: none; /* Remove qualquer cor de fundo */
+  font-size: inherit; /* Herda o tamanho da fonte do elemento pai */
+  font-family: inherit; /* Herda a família da fonte do elemento pai */
+  font-weight: inherit; /* Herda o peso da fonte do elemento pai */
+  line-height: inherit; /* Herda a altura da linha do elemento pai */
+  text-align: inherit; /* Herda o alinhamento do texto do elemento pai */
+}
