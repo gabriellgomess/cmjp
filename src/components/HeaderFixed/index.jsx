@@ -1,4 +1,4 @@
-import { Box, Button, Link } from "@mui/material"
+import { Box, Button, Link, Container } from "@mui/material"
 import ModalPagamento from '../ModalPagamento';
 import { useState } from 'react';
 import Facebook from '../../assets/icons/facebook.png';
@@ -8,7 +8,8 @@ import TikTok from '../../assets/icons/tik-tok.png'
 import WhatsApp from '../../assets/icons/whatsapp.png'
 import YouTube from '../../assets/icons/youtube.png'
 
-import LogoMain from '../../assets/logoMain.png'
+import LogoMain from '../../assets/logoADC.png'
+import LogoCMJP from '../../assets/logoCMJP-vertical.svg'
 
 import { Alert } from '@coreui/react';
 
@@ -26,13 +27,16 @@ function HeaderFixed() {
     };
 
     return (
-        <Box sx={{ width: "100%", height: "100px", background: "white", display: "flex", justifyContent: "space-between", alignItems: "center", }}>
+        <Container sx={{ width: "100%", height: "100px", background: "white", display: "flex", justifyContent: "space-between", alignItems: "center", }}>
+            
 
-            <Link to="/" sx={{ marginLeft: "20px" }}>
-                <img width={300} src={LogoMain} alt="Logo Amigos da Casa" />
+            <Link to="/" sx={{ marginLeft: "20px", display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <img width={70} src={LogoCMJP} alt="Logo Amigos da Casa" />
+                <img style={{ width: '100px', height: 'auto' }} src={LogoMain} alt="Logo Amigos da Casa" />
             </Link>
+
             <Box sx={{display: {xs: 'none', md: 'flex'}, gap: '30px'}}>
-                <Box sx={{ display: "flex", gap: "20px", height: "35px" }}>
+                {/* <Box sx={{ display: "flex", gap: "20px", height: "35px" }}>
                     <Link>
                         <img width={35} src={Instagram} alt="instagram" />
                     </Link>
@@ -52,7 +56,7 @@ function HeaderFixed() {
                         <img width={35} src={WhatsApp} alt="whatsapp" />
                     </Link>
 
-                </Box>
+                </Box> */}
                 <Box sx={{ display: 'flex', gap: '20px', paddingRight: '20px' }}>
                     <Button sx={{ padding: "10px" }} variant="contained" size="small" color="primary" onClick={handleOpenModal}>
                         Doar
@@ -64,7 +68,7 @@ function HeaderFixed() {
                 </Box>
             </Box>
 
-        </Box>
+        </Container>
     )
 }
 
