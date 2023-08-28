@@ -8,16 +8,16 @@ import { GerarCobranca } from "./pages/GerarCobranca";
 import { GerarCobrancaEmLote } from "./pages/GerarCobrancaEmLote";
 import { GerenciarCobranca } from "./pages/GerenciarCobranca";
 import Header from "./components/Header";
-import { Container, Typography, Box, Button } from "@mui/material";
+imnovas imagens e port { Container, Typography, Box, Button } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./App.css";
 
-import Img1 from "./assets/img_carousel/slide1.jpg";
-import Img2 from "./assets/img_carousel/slide2.jpg";
-import Img3 from "./assets/img_carousel/slide3.jpg";
+import Img1 from "./assets/img_carousel/1.jpg";
+import Img2 from "./assets/img_carousel/2.jpg";
+import Img3 from "./assets/img_carousel/3.jpg";
 
 import Banner from "./assets/banner.jpg";
 import BannerCriancas from "./assets/banner-criancas.jpg";

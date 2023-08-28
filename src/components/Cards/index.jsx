@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Button, CardActions, Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import axios from 'axios';
 
+import { useTheme } from '@mui/material/styles';
+
 
 import PaginaCampanha from '../PaginaCampanha/PaginaCampanha'
 
@@ -9,6 +11,8 @@ function Cards() {
     const [campanhas, setCampanhas] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [currentData, setCurrentData] = useState(null);
+
+    const theme = useTheme();
 
     useEffect(() => {
         try {
@@ -36,7 +40,9 @@ function Cards() {
 
 
     return (
-        <Box sx={{ width: "100%", display: "flex", gap: "15px", flexWrap: "wrap", justifyContent: 'center', marginBottom: '50px' }}>
+        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <Typography variant='h2' sx={{color: theme.palette.text.primary}}>Conheça e apoie nossos projetos!</Typography>
+            <Box sx={{ width: "100%", display: "flex", gap: "15px", flexWrap: "wrap", justifyContent: 'center', marginBottom: '50px' }}>
             {campanhas.map((data) => (
                 <Card sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} elevation={0} key={data.attributes.id}>
                     <CardContent sx={{ maxWidth: "350px", display: "flex", flexDirection: "column" }}>
@@ -53,11 +59,11 @@ function Cards() {
                         <Typography variant="body1" >{data.attributes.descricao}</Typography>
                     </CardContent>
                     <CardActions sx={{ display: "flex" }}>
-                        <Button sx={{ padding: "10px" }} variant="contained" size="small" color="primary">
-                            Doar
+                        <Button sx={{ padding: "10px" }} variant="outlined" size="small" color="primary">
+                            Saiba mais
                         </Button>
                         <Button sx={{ padding: "10px" }} variant="contained" size="small" color="primary">
-                            Doar por boleto
+                            Doe agora!
                         </Button>
                     </CardActions>
                 </Card>
@@ -65,6 +71,8 @@ function Cards() {
             <PaginaCampanha open={openModal} onClose={handleCloseModal} data={currentData} />
 
         </Box>
+        </Box>
+        
     )
 }
 
