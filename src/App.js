@@ -1,26 +1,24 @@
 import { Routes, Route } from "react-router-dom";
 
-import { Home } from "./pages/Home";
+import Home from "./pages/Home";
+import Contato from "./pages/Contato";
+import Sobre from "./pages/Sobre";
+import Backoffice from "./pages/Backoffice/Backoffice";
 
 import UserContext from "./components/Context";
 
-import { GerarCobranca } from "./pages/GerarCobranca";
-import { GerarCobrancaEmLote } from "./pages/GerarCobrancaEmLote";
-import { GerenciarCobranca } from "./pages/GerenciarCobranca";
+
 import Header from "./components/Header";
-imnovas imagens e port { Container, Typography, Box, Button } from "@mui/material";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Container, Typography, Box, Button } from "@mui/material";
+
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./App.css";
 
-import Img1 from "./assets/img_carousel/1.jpg";
-import Img2 from "./assets/img_carousel/2.jpg";
-import Img3 from "./assets/img_carousel/3.jpg";
 
-import Banner from "./assets/banner.jpg";
-import BannerCriancas from "./assets/banner-criancas.jpg";
+
+import Banner from "./assets/banner1.jpg";
+import BannerCriancas from "./assets/banner2.jpg";
 
 import LogoAmigosDaCasa from "./assets/logoMain.png";
 import LogoCMJP from "./assets/logo_cmjp.png";
@@ -77,31 +75,10 @@ const App = () => {
   });
 
   return (
-    <UserContext.Provider value={{ user: "Ignacio" }}>
+    <UserContext.Provider>
       <ThemeProvider theme={theme}>
         <Header />
-        <Carousel
-          width="99vw"
-          showThumbs={false}
-          showArrows={true}
-          infiniteLoop={true}
-          autoPlay={true}
-          transitionTime={800}
-          showStatus={false}
-        >
-          <div>
-            <img src={Img1} alt="Imagem 1" />
-            {/* <p className="legend">Legenda da Imagem 1</p> */}
-          </div>
-          <div>
-            <img src={Img2} alt="Imagem 2" />
-            {/* <p className="legend">Legenda da Imagem 2</p> */}
-          </div>
-          <div>
-            <img src={Img3} alt="Imagem 3" />
-            {/* <p className="legend">Legenda da Imagem 3</p> */}
-          </div>
-        </Carousel>
+        
 
         <Button
           size="large"
@@ -111,31 +88,24 @@ const App = () => {
             backgroundColor: theme.palette.background.green,
             position: "fixed",
             top: "50%",
-            right: "30px",
+            right: {xs: '80px', sm: '70px', md: '30px'},
             zIndex: "999",
           }}
         >
           Quero Doar
         </Button>
 
-        <Container sx={{ marginTop: "100px" }}>
+        
           <Routes>
-            <Route path="/homolog/" element={<Home />} />
-            <Route path="/homolog/gerar-cobranca" element={<GerarCobranca />} />
-            <Route
-              path="/homolog/gerar-cobranca-em-lote"
-              element={<GerarCobrancaEmLote />}
-            />
-            <Route
-              GerenciarCobranca
-              path="/homolog/gerenciar-cobranca"
-              element={<GerenciarCobranca />}
-            />
+            <Route path="/homolog/" element={<Home />} />            
+            <Route path="/homolog/sobre" element={<Sobre />} />
+            <Route path="/homolog/contato" element={<Contato />} />
+            <Route path="/homolog/backoffice" element={<Backoffice />} />
           </Routes>
-        </Container>
-        <Box>
+        
+        {/* <Box>
           <img src={Banner} alt="Banner" width="100%" />
-        </Box>
+        </Box> */}
         <Box>
           <img src={BannerCriancas} alt="Banner Crianças" width="100%" />
         </Box>
@@ -206,7 +176,7 @@ const App = () => {
             </Box>
           </Container>
         </Box>
-        <Box sx={{ background: theme.palette.text.dark, padding: "10px 0" }}>
+        {/* <Box sx={{ background: theme.palette.text.dark, padding: "10px 0" }}>
           <Container
             sx={{
               display: "flex",
@@ -222,7 +192,7 @@ const App = () => {
             </Typography>
             <img width={60} src={LogoNexus} alt="" />
           </Container>
-        </Box>
+        </Box> */}
       </ThemeProvider>
     </UserContext.Provider>
   );
