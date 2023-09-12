@@ -1,7 +1,4 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
-import swal from "sweetalert";
 import {
   Modal,
   Box,
@@ -21,21 +18,21 @@ import {
   Radio,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import swal from "sweetalert";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const ModalPagamento = ({ open, onClose, source, theme }) => {
-  // State and Handlers for Basic Information
   const [valor, setValor] = useState("");
   const [formaPagamento, setFormaPagamento] = useState("");
-  const [documentType, setDocumentType] = useState("cpf");
-  const [donationType, setDonationType] = useState("single");
-
-  // State and Handlers for Login Information
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  const [login, setLogin] = useState({ email: "", password: "" });
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+  });
 
-  
-  const handleDocumentTypeChange = (e) => setDocumentType(e.target.value);
+  const [donationType, setDonationType] = useState("single");
 
   const handleChange = (event) => {
     setFormaPagamento(event.target.value);
@@ -51,6 +48,12 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
     } else {
       setValor(input);
     }
+  };
+
+  const [documentType, setDocumentType] = useState("cpf");
+
+  const handleDocumentTypeChange = (event) => {
+    setDocumentType(event.target.value);
   };
 
   const handleCombinedChange = (event) => {
@@ -84,119 +87,6 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
       [event.target.name]: event.target.value,
     });
   }
-
-
-  const DonationForm = () => (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box sx={{ gap: "25px", display: "flex", flexWrap: "wrap" }}>
-        <TextField
-          id="outlined-basic"
-          label="Nome Completo"
-          variant="outlined"
-          sx={{ width: "100%" }}
-          {...register("nome")}
-        />
-        <Select
-          sx={{ width: "115px" }}
-          value={documentType}
-          onChange={(e) => handleCombinedChange(e)}
-          label=""
-          {...register("documentType")}
-        >
-          <MenuItem value="cpf">CPF</MenuItem>
-          <MenuItem value="cnpj">CNPJ</MenuItem>
-        </Select>
-
-        {documentType === "cpf" ? (
-          <TextField
-            sx={{ width: "280px" }}
-            label="CPF"
-            inputProps={{ maxLength: 11 }}
-            placeholder="Digite seu CPF"
-            {...register("document")}
-          />
-        ) : (
-          <TextField
-            sx={{ width: "280px" }}
-            label="CNPJ"
-            inputProps={{ maxLength: 14 }}
-            placeholder="Digite seu CNPJ"
-            {...register("document")}
-          />
-        )}
-
-        <TextField
-          id="outlined-basic"
-          label="E-mail"
-          variant="outlined"
-          sx={{ width: "420px" }}
-          {...register("email")}
-        />
-
-        <TextField
-          sx={{ width: "420px" }}
-          label="Celular"
-          inputProps={{ maxLength: 11 }}
-          placeholder="(DD)XXXXXXXXX"
-          {...register("mobile")}
-        />
-
-        <TextField
-          sx={{ width: "420px" }}
-          label="Telefone"
-          inputProps={{ maxLength: 10 }}
-          placeholder="(DD)XXXXXXXX"
-          {...register("phone")}
-        />
-
-        <TextField
-          id="outlined-basic"
-          label="Valor (mínimo R$:5,00)*"
-          variant="outlined"
-          sx={{ width: "420px" }}
-          defaultValue={valor}
-          onChange={(e) => handleValorChange(e)}
-          {...register("valor", { min: 5 })}
-        />
-
-        <Box>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Forma de pagamento
-            </InputLabel>
-            <Select
-              sx={{ width: "420px" }}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              defaultValue={formaPagamento}
-              label="Forma de pagamento"
-              onChange={(e) => handleChange(e)}
-              {...register("formaPagamento")}
-            >
-              <MenuItem value={"Cartão de crédito"}>Cartão de crédito</MenuItem>
-              <MenuItem value={"Pix"}>Pix</MenuItem>
-              <MenuItem value={"Cartão debito"}>Cartão debito</MenuItem>
-              <MenuItem value={"Boleto"}>Boleto</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
-      <Button type="submit">SALVAR</Button>
-    </form>
-  );
-
-  const LoginForm = () => (
-    <form onSubmit={handleLogin}>
-      <TextField label="Username" onChange={(e) => handleChangeLogin(e)} />
-      <TextField
-        type="password"
-        label="Password"
-        onChange={(e) => handleChangeLogin(e)}
-      />
-      <Button type="submit">Login</Button>
-      <Button onClick={() => setShowLogin(false)}>Fechar</Button>
-    </form>
-  );
 
   return (
     <Modal
@@ -260,7 +150,127 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
         >
           Faça aqui sua contribuição
         </Typography>
-        {donationType === "single" ? <DonationForm /> : <LoginForm />}
+        {donationType === "single" ? (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Box sx={{ gap: "25px", display: "flex", flexWrap: "wrap" }}>
+              <TextField
+                id="outlined-basic"
+                label="Nome Completo"
+                variant="outlined"
+                sx={{ width: "100%" }}
+                {...register("nome")}
+              />
+              <Select
+                sx={{ width: "115px" }}
+                value={documentType}
+                onChange={handleCombinedChange}
+                label=""
+                {...register("documentType")}
+              >
+                <MenuItem value="cpf">CPF</MenuItem>
+                <MenuItem value="cnpj">CNPJ</MenuItem>
+              </Select>
+
+              {documentType === "cpf" ? (
+                <TextField
+                  sx={{ width: "280px" }}
+                  label="CPF"
+                  inputProps={{ maxLength: 11 }}
+                  placeholder="Digite seu CPF"
+                  {...register("document")}
+                />
+              ) : (
+                <TextField
+                  sx={{ width: "280px" }}
+                  label="CNPJ"
+                  inputProps={{ maxLength: 14 }}
+                  placeholder="Digite seu CNPJ"
+                  {...register("document")}
+                />
+              )}
+
+              <TextField
+                id="outlined-basic"
+                label="E-mail"
+                variant="outlined"
+                sx={{ width: "420px" }}
+                {...register("email")}
+              />
+
+              <TextField
+                sx={{ width: "420px" }}
+                label="Celular"
+                inputProps={{ maxLength: 11 }}
+                placeholder="(DD)XXXXXXXXX"
+                {...register("mobile")}
+              />
+
+              <TextField
+                sx={{ width: "420px" }}
+                label="Telefone"
+                inputProps={{ maxLength: 10 }}
+                placeholder="(DD)XXXXXXXX"
+                {...register("phone")}
+              />
+
+              <TextField
+                id="outlined-basic"
+                label="Valor (mínimo R$:5,00)*"
+                variant="outlined"
+                sx={{ width: "420px" }}
+                defaultValue={valor}
+                onChange={handleValorChange}
+                {...register("valor", { min: 5 })}
+              />
+
+              <Box>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Forma de pagamento
+                  </InputLabel>
+                  <Select
+                    sx={{ width: "420px" }}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    defaultValue={formaPagamento}
+                    label="Forma de pagamento"
+                    onChange={handleChange}
+                    {...register("formaPagamento")}
+                  >
+                    <MenuItem value={"Cartão de crédito"}>
+                      Cartão de crédito
+                    </MenuItem>
+                    <MenuItem value={"Pix"}>Pix</MenuItem>
+                    <MenuItem value={"Cartão debito"}>Cartão debito</MenuItem>
+                    <MenuItem value={"Boleto"}>Boleto</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Box>
+            <Button type="submit">SALVAR</Button>
+          </form>
+        ) : (
+          //  Fomrulário privado
+          <>
+            {!isLoggedIn && showLogin && (
+              <form onSubmit={handleLogin}>
+                <TextField label="Username" onChange={(e)=>handleChangeLogin(e)} />
+                <TextField type="password" label="Password" onChange={()=>handleChangeLogin()} />
+                <Button type="submit">Login</Button>
+                <Button onClick={() => setShowLogin(false)}>Fechar</Button>
+              </form>
+            )}
+            {isLoggedIn ? (
+              <h1>Autenticado</h1>
+            ) : (
+              <>
+                <Button onClick={() => setShowLogin(true)}>
+                  Faça login para continuar
+                </Button>
+              </>
+            )}
+          </>
+        )}
         <Typography
           sx={{
             padding: "10px 0 0 0",

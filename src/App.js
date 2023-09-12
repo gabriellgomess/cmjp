@@ -9,17 +9,13 @@ import Backoffice from "./pages/Backoffice/Backoffice";
 
 import UserContext from "./components/Context";
 
-
 import Header from "./components/Header";
-import ModalPagamento from "./components/ModalPagamento";
+import ModalPagamento from "./components/ModalPagamento/old____index";
 
 import { Container, Typography, Box, Button } from "@mui/material";
 
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./App.css";
-
-
 
 import Banner from "./assets/banner1.jpg";
 import BannerCriancas from "./assets/banner2.jpg";
@@ -84,7 +80,6 @@ const App = () => {
     <UserContext.Provider>
       <ThemeProvider theme={theme}>
         <Header />
-        
 
         <Button
           size="large"
@@ -94,7 +89,7 @@ const App = () => {
             backgroundColor: theme.palette.background.green,
             position: "fixed",
             top: "50%",
-            right: {xs: '80px', sm: '70px', md: '30px'},
+            right: { xs: "80px", sm: "70px", md: "30px" },
             zIndex: "999",
           }}
           onClick={() => setOpen(true)}
@@ -102,14 +97,13 @@ const App = () => {
           Quero Doar
         </Button>
 
-        
-          <Routes>
-            <Route path="/homolog/" element={<Home />} />            
-            <Route path="/homolog/sobre" element={<Sobre />} />
-            <Route path="/homolog/contato" element={<Contato />} />
-            <Route path="/homolog/backoffice" element={<Backoffice />} />
-          </Routes>
-        
+        <Routes>
+          <Route path="/homolog/" element={<Home />} />
+          <Route path="/homolog/sobre" element={<Sobre />} />
+          <Route path="/homolog/contato" element={<Contato />} />
+          <Route path="/homolog/backoffice" element={<Backoffice />} />
+        </Routes>
+
         {/* <Box>
           <img src={Banner} alt="Banner" width="100%" />
         </Box> */}
@@ -200,7 +194,12 @@ const App = () => {
             <img width={60} src={LogoNexus} alt="" />
           </Container>
         </Box> */}
-        <ModalPagamento open={open} onClose={() => setOpen(false)} source='geral' theme={theme} />
+        <ModalPagamento
+          open={open}
+          onClose={() => setOpen(false)}
+          source="geral"
+          theme={theme}
+        />
       </ThemeProvider>
     </UserContext.Provider>
   );

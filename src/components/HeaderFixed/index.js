@@ -1,5 +1,5 @@
 import { Box, Button, Link, Container } from "@mui/material";
-import ModalPagamento from "../ModalPagamento";
+import ModalPagamento from "../ModalPagamento/old____index";
 import { useState } from "react";
 import Facebook from "../../assets/icons/facebook.png";
 import Instagram from "../../assets/icons/instagram.png";
@@ -61,7 +61,6 @@ function HeaderFixed() {
       </Link>
 
       <Box sx={{ display: { xs: "none", md: "flex" }, gap: "30px" }}>
-       
         <Box sx={{ display: "flex", gap: "20px", paddingRight: "20px" }}>
           <Button
             sx={{ padding: "10px" }}
@@ -72,7 +71,7 @@ function HeaderFixed() {
           >
             Doar
           </Button>
-          
+
           <ModalPagamento open={openModal} onClose={handleCloseModal} />
         </Box>
       </Box>
