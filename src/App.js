@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -9,6 +11,8 @@ import UserContext from "./components/Context";
 
 
 import Header from "./components/Header";
+import ModalPagamento from "./components/ModalPagamento";
+
 import { Container, Typography, Box, Button } from "@mui/material";
 
 
@@ -33,6 +37,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 const App = () => {
+  const [open, setOpen] = useState(false);
+
   // #74c3bb verde
   // #f2a243 amarelo
   // #e9434b vermelho
@@ -91,6 +97,7 @@ const App = () => {
             right: {xs: '80px', sm: '70px', md: '30px'},
             zIndex: "999",
           }}
+          onClick={() => setOpen(true)}
         >
           Quero Doar
         </Button>
@@ -193,6 +200,7 @@ const App = () => {
             <img width={60} src={LogoNexus} alt="" />
           </Container>
         </Box> */}
+        <ModalPagamento open={open} onClose={() => setOpen(false)} source='geral' theme={theme} />
       </ThemeProvider>
     </UserContext.Provider>
   );
