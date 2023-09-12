@@ -32,7 +32,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
   // State and Handlers for Login Information
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  const [login, setLogin] = useState({ email: "", password: "" });
+  const [login, setLogin] = useState([]);
 
   
   const handleDocumentTypeChange = (e) => setDocumentType(e.target.value);
@@ -67,7 +67,8 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
     event.preventDefault();
     axios
       .post("https://amigosdacasa.org.br/gerenciador-doacoes-amigosdacasa/login/login.php", {
-        login
+        email: login.email,
+        password: login.password
       })
       .then((response) => {
         console.log(response);
@@ -185,19 +186,6 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
     </form>
   );
 
-  const LoginForm = () => (
-    <form onSubmit={handleLogin}>
-      <TextField label="Username" onChange={(e) => handleChangeLogin(e)} />
-      <TextField
-        type="password"
-        label="Password"
-        onChange={(e) => handleChangeLogin(e)}
-      />
-      <Button type="submit">Login</Button>
-      <Button onClick={() => setShowLogin(false)}>Fechar</Button>
-    </form>
-  );
-
   return (
     <Modal
       sx={{
@@ -260,7 +248,25 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
         >
           Faça aqui sua contribuição
         </Typography>
-        {donationType === "single" ? <DonationForm /> : <LoginForm />}
+        {donationType === "single" ? <DonationForm /> : (
+          <>
+          <form onSubmit={handleLogin}>
+      <TextField 
+          name="email"
+          label="Username" 
+          onChange={(e) => handleChangeLogin(e)} 
+      />
+      <TextField
+        type="password"
+        name="password"
+        label="Password"
+        onChange={(e) => handleChangeLogin(e)}
+      />
+      <Button type="submit">Login</Button>
+      <Button onClick={() => setShowLogin(false)}>Fechar</Button>
+    </form>
+          </>
+        )}
         <Typography
           sx={{
             padding: "10px 0 0 0",

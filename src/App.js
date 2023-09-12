@@ -10,7 +10,7 @@ import Backoffice from "./pages/Backoffice/Backoffice";
 import UserContext from "./components/Context";
 
 import Header from "./components/Header";
-import ModalPagamento from "./components/ModalPagamento/old____index";
+import ModalPagamento from "./components/ModalPagamento";
 
 import { Container, Typography, Box, Button } from "@mui/material";
 

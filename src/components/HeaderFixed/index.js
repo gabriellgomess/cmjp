@@ -1,5 +1,5 @@
 import { Box, Button, Link, Container } from "@mui/material";
-import ModalPagamento from "../ModalPagamento/old____index";
+import ModalPagamento from "../ModalPagamento";
 import { useState } from "react";
 import Facebook from "../../assets/icons/facebook.png";
 import Instagram from "../../assets/icons/instagram.png";
