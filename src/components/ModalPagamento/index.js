@@ -1,26 +1,23 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import swal from "sweetalert";
 import {
   Modal,
   Box,
-  Button,
   Typography,
-  TextField,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
   IconButton,
-  Divider,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
+  FormControl,
   RadioGroup,
   Radio,
+  FormControlLabel,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+
+import DonationForm from "./DonationForm";
+import LoginForm from "./LoginForm";
+import LegalWarnings from "./LegalWarnings";
+import ContinueButton from "./ContinueButton";
+import RecurrentForm from "./RecurrentForm";
 
 const ModalPagamento = ({ open, onClose, source, theme }) => {
   // State and Handlers for Basic Information
@@ -34,13 +31,8 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [login, setLogin] = useState([]);
 
-  
   const handleDocumentTypeChange = (e) => setDocumentType(e.target.value);
-
-  const handleChange = (event) => {
-    setFormaPagamento(event.target.value);
-  };
-
+  const handleChange = (event) => setFormaPagamento(event.target.value);
   const handleValorChange = (event) => {
     const input = event.target.value;
     const parsedValue = parseFloat(input.replace(",", "."));
@@ -52,24 +44,18 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
       setValor(input);
     }
   };
-
-  const handleCombinedChange = (event) => {
-    handleDocumentTypeChange(event);
-  };
-
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const handleCombinedChange = (event) => handleDocumentTypeChange(event);
 
   const handleLogin = (event) => {
     event.preventDefault();
     axios
-      .post("https://amigosdacasa.org.br/gerenciador-doacoes-amigosdacasa/login/login.php", {
-        email: login.email,
-        password: login.password
-      })
+      .post(
+        "https://amigosdacasa.org.br/gerenciador-doacoes-amigosdacasa/login/login.php",
+        {
+          email: login.email,
+          password: login.password,
+        }
+      )
       .then((response) => {
         console.log(response);
         setIsLoggedIn(true);
@@ -84,107 +70,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
       ...login,
       [event.target.name]: event.target.value,
     });
-  }
-
-
-  const DonationForm = () => (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box sx={{ gap: "25px", display: "flex", flexWrap: "wrap" }}>
-        <TextField
-          id="outlined-basic"
-          label="Nome Completo"
-          variant="outlined"
-          sx={{ width: "100%" }}
-          {...register("nome")}
-        />
-        <Select
-          sx={{ width: "115px" }}
-          value={documentType}
-          onChange={(e) => handleCombinedChange(e)}
-          label=""
-          {...register("documentType")}
-        >
-          <MenuItem value="cpf">CPF</MenuItem>
-          <MenuItem value="cnpj">CNPJ</MenuItem>
-        </Select>
-
-        {documentType === "cpf" ? (
-          <TextField
-            sx={{ width: "280px" }}
-            label="CPF"
-            inputProps={{ maxLength: 11 }}
-            placeholder="Digite seu CPF"
-            {...register("document")}
-          />
-        ) : (
-          <TextField
-            sx={{ width: "280px" }}
-            label="CNPJ"
-            inputProps={{ maxLength: 14 }}
-            placeholder="Digite seu CNPJ"
-            {...register("document")}
-          />
-        )}
-
-        <TextField
-          id="outlined-basic"
-          label="E-mail"
-          variant="outlined"
-          sx={{ width: "420px" }}
-          {...register("email")}
-        />
-
-        <TextField
-          sx={{ width: "420px" }}
-          label="Celular"
-          inputProps={{ maxLength: 11 }}
-          placeholder="(DD)XXXXXXXXX"
-          {...register("mobile")}
-        />
-
-        <TextField
-          sx={{ width: "420px" }}
-          label="Telefone"
-          inputProps={{ maxLength: 10 }}
-          placeholder="(DD)XXXXXXXX"
-          {...register("phone")}
-        />
-
-        <TextField
-          id="outlined-basic"
-          label="Valor (mínimo R$:5,00)*"
-          variant="outlined"
-          sx={{ width: "420px" }}
-          defaultValue={valor}
-          onChange={(e) => handleValorChange(e)}
-          {...register("valor", { min: 5 })}
-        />
-
-        <Box>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Forma de pagamento
-            </InputLabel>
-            <Select
-              sx={{ width: "420px" }}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              defaultValue={formaPagamento}
-              label="Forma de pagamento"
-              onChange={(e) => handleChange(e)}
-              {...register("formaPagamento")}
-            >
-              <MenuItem value={"Cartão de crédito"}>Cartão de crédito</MenuItem>
-              <MenuItem value={"Pix"}>Pix</MenuItem>
-              <MenuItem value={"Cartão debito"}>Cartão debito</MenuItem>
-              <MenuItem value={"Boleto"}>Boleto</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
-      <Button type="submit">SALVAR</Button>
-    </form>
-  );
+  };
 
   return (
     <Modal
@@ -202,7 +88,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
       <Box
         sx={{
           width: 900,
-          height: 700,
+          height: 750,
           bgcolor: "background.paper",
           p: 2,
           display: "flex",
@@ -248,69 +134,28 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
         >
           Faça aqui sua contribuição
         </Typography>
-        {donationType === "single" ? <DonationForm /> : (
-          <>
-          <form onSubmit={handleLogin}>
-      <TextField 
-          name="email"
-          label="Username" 
-          onChange={(e) => handleChangeLogin(e)} 
-      />
-      <TextField
-        type="password"
-        name="password"
-        label="Password"
-        onChange={(e) => handleChangeLogin(e)}
-      />
-      <Button type="submit">Login</Button>
-      <Button onClick={() => setShowLogin(false)}>Fechar</Button>
-    </form>
-          </>
-        )}
-        <Typography
-          sx={{
-            padding: "10px 0 0 0",
-            margin: "0",
-            display: "flex",
-            justifyContent: "center",
-          }}
-          gutterBottom
-          variant="h5"
-          color="primary"
-        >
-          Avisos legais
-        </Typography>
-        <Typography
-          sx={{ textAlign: "left" }}
-          gutterBottom
-          variant="body1"
-          color="primary"
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-          quisquam molestias id odio cum placeat vero magnam delectus, possimus
-          praesentium quibusdam accusantium, eius fuga quae! Dolor corporis
-          debitis accusamus quas?is
-        </Typography>
-        <FormGroup sx={{ display: "flex" }}>
-          <FormControlLabel
-            sx={{ color: "gray" }}
-            control={<Checkbox defaultChecked />}
-            label="Estou ciente dos termos descritos acima"
-          />
-          <FormControlLabel
-            sx={{ color: "gray" }}
-            control={<Checkbox defaultChecked />}
-            label="Concordo em receber informações sobre a Casa do Menido Jesus de Praga"
-          />
-        </FormGroup>
-        <Divider
-          sx={{
-            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.3)",
-            backgroundColor: "primary-dark",
-          }}
-        />
 
-        <Button variant="contained">Continuar</Button>
+        {donationType === "single" ? (
+          <DonationForm
+            documentType={documentType}
+            handleCombinedChange={handleCombinedChange}
+            valor={valor}
+            handleValorChange={handleValorChange}
+            formaPagamento={formaPagamento}
+            handleChange={handleChange}
+          />
+        ) : isLoggedIn ? (
+          <RecurrentForm />
+        ) : (
+          <LoginForm
+            handleLogin={handleLogin}
+            handleChangeLogin={handleChangeLogin}
+          />
+        )}
+
+        <LegalWarnings />
+
+        <ContinueButton />
       </Box>
     </Modal>
   );
