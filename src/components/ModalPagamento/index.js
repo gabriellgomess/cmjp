@@ -18,6 +18,7 @@ import LoginForm from "./LoginForm";
 import LegalWarnings from "./LegalWarnings";
 import ContinueButton from "./ContinueButton";
 import RecurrentForm from "./RecurrentForm";
+import RegisterForm from "./RegisterForm";
 
 const ModalPagamento = ({ open, onClose, source, theme }) => {
   // State and Handlers for Basic Information
@@ -30,6 +31,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [login, setLogin] = useState([]);
+  const [showRegister, setShowRegister] = useState(false);
 
   const handleDocumentTypeChange = (e) => setDocumentType(e.target.value);
   const handleChange = (event) => setFormaPagamento(event.target.value);
@@ -50,7 +52,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
     event.preventDefault();
     axios
       .post(
-        "https://amigosdacasa.org.br/gerenciador-doacoes-amigosdacasa/login/login.php",
+        "https://amigosdacasa.org.br/gerenciador-doacoes-amigosdacasa/login_site/login.php",
         {
           email: login.email,
           password: login.password,
@@ -59,6 +61,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
       .then((response) => {
         console.log(response);
         setIsLoggedIn(true);
+        localStorage.setItem("loginToken", response.data.token);
       })
       .catch((error) => {
         console.log(error);
@@ -71,6 +74,9 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleShowLogin = () => setShowRegister(false);
+
 
   return (
     <Modal
@@ -133,8 +139,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
           color="primary"
         >
           Faça aqui sua contribuição
-        </Typography>
-
+        </Typography>       
         {donationType === "single" ? (
           <DonationForm
             documentType={documentType}
@@ -145,11 +150,14 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
             handleChange={handleChange}
           />
         ) : isLoggedIn ? (
-          <RecurrentForm />
+          <RecurrentForm theme={theme} />
+        ) : showRegister ? (
+          <RegisterForm handleShowLogin={handleShowLogin} />
         ) : (
           <LoginForm
             handleLogin={handleLogin}
             handleChangeLogin={handleChangeLogin}
+            handleShowRegister={() => setShowRegister(true)} // pass this new prop to LoginForm
           />
         )}
 

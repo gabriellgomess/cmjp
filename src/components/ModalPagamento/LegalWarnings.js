@@ -3,7 +3,7 @@ import { Typography, FormGroup, FormControlLabel, Checkbox } from "@mui/material
 const LegalWarnings = () => {
   return (
     <>
-       <Typography
+       {/* <Typography
           sx={{
             padding: "10px 0 0 0",
             margin: "0",
@@ -38,7 +38,7 @@ const LegalWarnings = () => {
             control={<Checkbox defaultChecked />}
             label="Concordo em receber informações sobre a Casa do Menido Jesus de Praga"
           />
-        </FormGroup>
+        </FormGroup> */}
     </>
   );
 };
