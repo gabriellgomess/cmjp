@@ -13,11 +13,12 @@ import {
   Button,
   Tabs,
   Tab,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
   
 } from "@mui/material";
 import PropTypes from 'prop-types';
 import HelpIcon from "@mui/icons-material/Help";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import axios from "axios";
 import Logo from '../../assets/LOGOS/AJUSTADOS/logoAmigosDaCasa-vertical.png';
 
@@ -69,6 +70,7 @@ const RecurrentForm = ({ theme }) => {
   const [theUser, setTheUser] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState('');
   const [billings, setBillings] = useState([]);
+  const [update, setUpdate] = useState(false);
 
 
 
@@ -93,19 +95,25 @@ const RecurrentForm = ({ theme }) => {
           if (data.success && data.user) {
             setIsAuth(true);
             setTheUser(data.user);
-            await getBillings();
+            setUpdate(!update);
           } else {
             setIsAuth(false);
+            setUpdate(!update);
           }
         } catch (error) {
           console.error("Erro ao buscar informações do usuário:", error);
           setIsAuth(false);
+          setUpdate(!update);
         }
       }
     };
 
     fetchUserData();
   }, []);
+
+  useEffect(() => {
+    getBillings();
+  }, [update]);
 
   const {
     register,
@@ -126,8 +134,10 @@ const RecurrentForm = ({ theme }) => {
       .then((response) => {
         if (response.data.status === "success") {          
          console.log(response.data.message)
+         setUpdate(!update);
         } else if (response.data.status === "error") {          
-          console.log(response.data.message)        
+          console.log(response.data.message)
+          setUpdate(!update);     
         }
       })
       .catch((error) => {
@@ -148,9 +158,42 @@ const RecurrentForm = ({ theme }) => {
     event.target.value = valor === "0,00" ? "" : "R$ "+valor;
   }
 
+  const statusMapping = {
+    PENDING: "Aguardando pagamento",
+    RECEIVED: "Recebida",
+    CONFIRMED: "Pagamento confirmado (saldo ainda não creditado)",
+    OVERDUE: "Vencida",
+    REFUNDED: "Estornada",
+    RECEIVED_IN_CASH: "Recebida em dinheiro (não gera saldo na conta)",
+    REFUND_REQUESTED: "Estorno Solicitado",
+    REFUND_IN_PROGRESS: "Estorno em processamento (liquidação já está agendada, cobrança será estornada após executar a liquidação)",
+    CHARGEBACK_REQUESTED: "Recebido chargeback",
+    CHARGEBACK_DISPUTE: "Em disputa de chargeback (caso sejam apresentados documentos para contestação)",
+    AWAITING_CHARGEBACK_REVERSAL: "Disputa vencida, aguardando repasse da adquirente",
+    DUNNING_REQUESTED: "Em processo de negativação",
+    DUNNING_RECEIVED: "Recuperada",
+    AWAITING_RISK_ANALYSIS: "Pagamento em análise",
+  };
+  
+  function getFriendlyStatus(status) {
+    return statusMapping[status] || "Status Desconhecido";
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("loginToken"); // Remove o token de autenticação do localStorage
+    setIsAuth(false); // Atualize o estado da autenticação
+    // Você pode também redirecionar o usuário para a página inicial ou de login usando:
+    window.location.reload();
+  };
+  
+
   return (
     <Box sx={{ width: '100%' }}>      
     <Box>
+      <Box sx={{width: '100%', display: 'flex', justifyContent: 'end'}}>
+        <Button onClick={handleLogout} variant="outlined">Sair</Button>
+      </Box>
+    
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Criar uma doação " {...a11yProps(0)} />
@@ -160,13 +203,7 @@ const RecurrentForm = ({ theme }) => {
       <CustomTabPanel value={value} index={0}>
       {isAuth && (
       <Card elevation={0} sx={{ width: "100%", marginTop: "20px" }}>
-      <CardContent>     
-        {/* <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          <Typography variant="h5">Doação Recorrente</Typography>
-          <Tooltip title="A doação recorrente é cobrada todos os meses de forma automática com valor definido.">
-            <HelpIcon sx={{ color: "primary.main" }} />
-          </Tooltip>
-        </Box> */}
+      <CardContent>
         <Box sx={{display: 'flex'}}>
         <Box sx={{ width: "400px", minWidth: "400px", display: {xs: "none", md: "flex"}, flexDirection: "column", gap: "15px", justifyContent: "center", alignItems: "center" }}>
           <img style={{width: "60%"}} src={Logo} alt="Logo" />
@@ -232,9 +269,36 @@ const RecurrentForm = ({ theme }) => {
     )}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        {billings.map((billing) => (
-          <p style={{color: 'black'}} key={billing.id}>{billing.id}</p>
-        ))}
+      <TableContainer component={Paper}>
+      <Table aria-label="billing table">
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Data da criação</TableCell>
+            <TableCell>Vencimento</TableCell>
+            <TableCell>Forma de Pagamento</TableCell>
+            <TableCell>Valor</TableCell>
+            <TableCell>Link</TableCell>
+            <TableCell>Status</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {billings.map((billing) => (
+            <TableRow key={billing.id}>
+              <TableCell component="th" scope="row">{billing.id}</TableCell>
+              <TableCell>{billing.dateCreated?.split('-').reverse().join('/')}</TableCell>
+              <TableCell>{billing.dueDate?.split('-').reverse().join('/')}</TableCell>
+              <TableCell>{billing.billingType}</TableCell>
+              <TableCell>{billing.value?.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</TableCell>
+              <TableCell><Button href={billing.invoiceUrl} target="blank">Link</Button></TableCell>
+              <TableCell>{getFriendlyStatus(billing.status)}</TableCell>
+
+              
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
       </CustomTabPanel>
       
     </Box>
