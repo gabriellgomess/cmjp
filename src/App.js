@@ -67,6 +67,7 @@ const App = () => {
         header: "#FFFFFF",
         paper: "#FFFFFF",
         green: "#74c3bb",
+        greenLight: "#74c3bb9c",
         yellow: "#f2a243",
         red: "#f44336",
         blue: "#90caf9",

@@ -59,9 +59,17 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
         }
       )
       .then((response) => {
-        console.log(response);
-        setIsLoggedIn(true);
-        localStorage.setItem("loginToken", response.data.token);
+        if (response.data.success === 1) {
+          setIsLoggedIn(true);
+          localStorage.setItem("loginToken", response.data.token);
+        } else {
+          console.log("Falha no login:", response.data.message);
+          swal({
+            title: "Falha no login",
+            text: response.data.message,
+            icon: "error",
+          });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -93,8 +101,8 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
     >
       <Box
         sx={{
-          width: 900,
-          height: 750,
+          width: { xs: "100%", md: "80%" },
+          height: "100vh",
           bgcolor: "background.paper",
           p: 2,
           display: "flex",
@@ -148,6 +156,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
             handleValorChange={handleValorChange}
             formaPagamento={formaPagamento}
             handleChange={handleChange}
+            theme={theme}
           />
         ) : isLoggedIn ? (
           <RecurrentForm theme={theme} />
