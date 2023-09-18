@@ -85,7 +85,6 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
 
   const handleShowLogin = () => setShowRegister(false);
 
-
   return (
     <Modal
       sx={{
@@ -147,7 +146,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
           color="primary"
         >
           Faça aqui sua contribuição
-        </Typography>       
+        </Typography>
         {donationType === "single" ? (
           <DonationForm
             documentType={documentType}

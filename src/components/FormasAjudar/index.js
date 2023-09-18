@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme, Box, Container, Typography, Button } from '@mui/material';
+import { useTheme, Box, Container, Typography, Button } from "@mui/material";
 
 const donationItems = [
   {
@@ -65,14 +65,27 @@ const donationItems = [
 ];
 
 const FormasAjudar = () => {
-    const theme = useTheme();
+  const theme = useTheme();
   return (
-    <Container sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: {xs: '50px 20px', sm: '50px 20px', md: '50px 0'} }}>
+    <Container
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        padding: { xs: "50px 20px", sm: "50px 20px", md: "50px 0" },
+      }}
+    >
       {donationItems.map((item, index) => (
-        <Box sx={{width: {xs: '100%', sm: '100%', md: '48%'} }} key={index}>
-          <Typography color={theme.palette.text.dark} variant="h4">{item.title}</Typography>
-          <Typography color={theme.palette.text.dark} variant="body1">{item.description}</Typography>
-          <Typography color={theme.palette.text.dark} variant="body1">{item.pageContent}</Typography>
+        <Box sx={{ width: { xs: "100%", sm: "100%", md: "48%" } }} key={index}>
+          <Typography color={theme.palette.text.dark} variant="h4">
+            {item.title}
+          </Typography>
+          <Typography color={theme.palette.text.dark} variant="body1">
+            {item.description}
+          </Typography>
+          <Typography color={theme.palette.text.dark} variant="body1">
+            {item.pageContent}
+          </Typography>
           <Button>{item.buttonLabel}</Button>
         </Box>
       ))}

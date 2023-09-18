@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Box, Button, Link, Container, Dialog, DialogTitle, DialogContent } from "@mui/material";
+import {
+  Box,
+  Button,
+  Link,
+  Container,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from "@mui/material";
 import FormDoacao from "../FormDoacao/FormDoacao";
 
 import LogoMain from "../../assets/LOGOS/AJUSTADOS/logo_horizontal_adc.png";
@@ -69,7 +77,6 @@ function HeaderFixed() {
               <FormDoacao fundo="geral" />
             </DialogContent>
           </Dialog>
-          
         </Box>
       </Box>
     </Container>

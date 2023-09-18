@@ -154,7 +154,6 @@ function Header() {
                     <Button
                       sx={{ color: theme.palette.text.dark, display: "flex" }}
                       disableElevation
-                      
                     >
                       Home
                     </Button>
@@ -165,7 +164,6 @@ function Header() {
                     <Button
                       sx={{ color: theme.palette.text.dark, display: "flex" }}
                       disableElevation
-                      
                     >
                       Sobre
                     </Button>
@@ -223,7 +221,6 @@ function Header() {
                     <Button
                       sx={{ color: theme.palette.text.dark, display: "flex" }}
                       disableElevation
-                     
                     >
                       Contato
                     </Button>
@@ -231,7 +228,6 @@ function Header() {
                 </MenuItem>
               </Menu>
             </Box>
-
 
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Link to="/homolog/">

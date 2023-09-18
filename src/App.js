@@ -123,7 +123,6 @@ const App = () => {
               gap: "30px",
             }}
           >
-            
             <Box
               sx={{
                 width: { sx: "100%", md: "50%" },
@@ -148,7 +147,7 @@ const App = () => {
                 <img width="100%" src={LogoAmigosDaCasaVertical} alt="" />
               </Box>
             </Box>
-            
+
             <Box
               sx={{
                 width: { sx: "100%", md: "50%" },
@@ -181,7 +180,7 @@ const App = () => {
             </Box>
           </Container>
         </Box>
-        
+
         {/* <Box sx={{ background: theme.palette.text.dark, padding: "10px 0" }}>
           <Container
             sx={{

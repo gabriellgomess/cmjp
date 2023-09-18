@@ -11,7 +11,7 @@ import {
 const Sobre = () => {
   const theme = useTheme();
   return (
-    <Container sx={{marginTop: '60px', marginBottom: '60px'}}>
+    <Container sx={{ marginTop: "60px", marginBottom: "60px" }}>
       <Typography variant="h3" color={theme.palette.text.green}>
         Quem somos
       </Typography>

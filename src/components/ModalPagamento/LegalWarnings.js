@@ -1,9 +1,14 @@
-import { Typography, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import {
+  Typography,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 
 const LegalWarnings = () => {
   return (
     <>
-       {/* <Typography
+      {/* <Typography
           sx={{
             padding: "10px 0 0 0",
             margin: "0",

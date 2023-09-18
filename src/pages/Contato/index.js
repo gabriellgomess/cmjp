@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  Container,
-  TextField,
-  Button
-} from "@mui/material";
+import { Box, Typography, Container, TextField, Button } from "@mui/material";
 import { useTheme } from "@mui/material";
 
 const Contato = () => {
@@ -87,7 +81,7 @@ const Contato = () => {
               label="Mensagem"
               multiline
               rows={4}
-                variant="standard"
+              variant="standard"
             />
             <Button variant="contained" color="primary">
               Enviar
