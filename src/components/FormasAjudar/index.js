@@ -1,71 +1,41 @@
-import React from "react";
-import { useTheme, Box, Container, Typography, Button } from "@mui/material";
+import React, {useState, useEffect} from "react";
+import { useTheme, Box, Container, Typography, Button, Dialog,
+  DialogContent, } from "@mui/material";
+import axios from "axios";
+import ReactMarkdown from 'react-markdown';
 
-const donationItems = [
-  {
-    title: "Doe seu imposto de renda (Funcriança)",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-  {
-    title: "Eventos",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-  {
-    title: "Bazar Amigos da Casa",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-  {
-    title: "Doação por Testamento",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-  {
-    title: "PIX",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-  {
-    title: "NFG",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-  {
-    title: "Tampinha Legal",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-  {
-    title: "Lei do Esporte",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-  {
-    title: "Lei Solidariedade",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-  {
-    title: "Outras formas de colaborar",
-    description: "Prever texto curto abaixo do título",
-    pageContent: "Página interna deste tipo de doação com conteúdo",
-    buttonLabel: "Saiba mais",
-  },
-];
 
 const FormasAjudar = () => {
   const theme = useTheme();
+  const [comoApoiar, setComoApoiar] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [currentData, setCurrentData] = useState(null);
+
+  useEffect(() => {
+    try {
+      axios
+        .get(
+          "https://strapi-production-c201.up.railway.app/api/como-apoiars?populate=*"
+        )
+        .then((response) => {
+          setComoApoiar(response.data.data);
+          console.log(response.data.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const handleOpenDialog = (data) => {
+    setCurrentData(data);
+    setOpenDialog(true);
+    console.log(data);
+  };
+
+  const handleCloseDialog = () => {
+    setCurrentData(null);
+    setOpenDialog(false);
+  };
   return (
     <Container
       sx={{
@@ -75,20 +45,41 @@ const FormasAjudar = () => {
         padding: { xs: "50px 20px", sm: "50px 20px", md: "50px 0" },
       }}
     >
-      {donationItems.map((item, index) => (
+      {comoApoiar.map((item, index) => (
         <Box sx={{ width: { xs: "100%", sm: "100%", md: "48%" } }} key={index}>
           <Typography color={theme.palette.text.dark} variant="h4">
-            {item.title}
+            {item.attributes.titulo}
           </Typography>
           <Typography color={theme.palette.text.dark} variant="body1">
-            {item.description}
-          </Typography>
-          <Typography color={theme.palette.text.dark} variant="body1">
-            {item.pageContent}
-          </Typography>
-          <Button>{item.buttonLabel}</Button>
+          {item.attributes.descricao}
+          </Typography>          
+          <Button onClick={() => handleOpenDialog(item)}>Saiba mais</Button>
         </Box>
       ))}
+      {openDialog && (
+          <Dialog
+            open={openDialog}
+            onClose={handleCloseDialog}
+            aria-labelledby="form-dialog-title"
+            fullWidth
+          >
+            <DialogContent>
+              <Typography color={theme.palette.text.dark} variant="h4">
+                {currentData.attributes.titulo}
+              </Typography>
+              <Typography color={theme.palette.text.dark} variant="body1">
+                {currentData.attributes.descricao}
+              </Typography>
+              <Box sx={{fontFamily: 'Arial'}}>
+                <ReactMarkdown>{currentData.attributes.pagina_interna}</ReactMarkdown>
+              </Box>
+              <Typography color={theme.palette.text.dark} variant="body1">
+                {currentData.attributes.link}
+              </Typography>
+              
+            </DialogContent>
+          </Dialog>
+        )}
     </Container>
   );
 };

@@ -19,7 +19,7 @@ import FormDoacao from "../FormDoacao/FormDoacao";
 function Cards() {
   const [campanhas, setCampanhas] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [openDialog, setOpenDialog] = useState(false); // New state for dialog
+  const [openDialog, setOpenDialog] = useState(false);
   const [currentData, setCurrentData] = useState(null);
   const theme = useTheme();
 
