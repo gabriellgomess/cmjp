@@ -8,9 +8,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { Box, Typography, useTheme } from "@mui/material";
 
-import Img1 from "../../assets/img_carousel/1.jpg";
-import Img2 from "../../assets/img_carousel/2.jpg";
-import Img3 from "../../assets/img_carousel/3.jpg";
+import Img1 from "../../assets/img_carousel/bazar.jpg";
+import Img2 from "../../assets/img_carousel/funcrianca.jpg";
+import Img3 from "../../assets/img_carousel/lei_solidariedade.jpg";
 import BannerFuncrianca from "../../assets/banner.jpg";
 
 const Home = () => {
@@ -23,19 +23,31 @@ const Home = () => {
         showArrows={true}
         infiniteLoop={true}
         autoPlay={true}
-        transitionTime={800}
+        transitionTime={1000}
         showStatus={false}
       >
-        <div>
-          <img src={Img1} alt="Imagem 1" />          
-        </div>
-        <div>
-          <img src={Img2} alt="Imagem 2" />
-        </div>
-        <div>
-          <img src={Img3} alt="Imagem 3" />
-        </div>
+        <Box sx={{paddingLeft: '20px', height: '600px', backgroundImage: `url(${Img1})`, backgroundSize: 'cover', backgroundPositionY: '30%', display: 'flex', alignItems: 'start', justifyContent: 'start'}}>
+          <Box sx={{width: '60%', display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
+            <Typography variant="h3" color={theme.palette.text.green} sx={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontWeight: 'bolder', textAlign: 'left'}}>Aplique parte do seu IR no melhor dos fundos: Funcriança.</Typography>
+            <Typography variant="h5" color={theme.palette.text.yellow} sx={{textAlign: 'left'}}>Programa federal onde pessoas físicas (que declaram pelo modelo completo) e jurídicas (enquadradas no regime de lucro real) fazem doações e abatem diretamente no imposto de renda devido. </Typography>
+          </Box>
+          
+        </Box>
+        <Box sx={{paddingLeft: '20px', height: '600px', backgroundImage: `url(${Img2})`, backgroundSize: 'cover', backgroundPositionY: '30%', display: 'flex', alignItems: 'start', justifyContent: 'start'}}>
+        <Box sx={{width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
+            <Typography variant="h3" color={theme.palette.text.green} sx={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontWeight: 'bolder', textAlign: 'left'}}>Lei da Solidariedade</Typography>
+            <Typography variant="h5" color={theme.palette.text.yellow} sx={{textAlign: 'left'}}>A sua empresa pode colaborar conosco através dos incentivos fiscais, via Lei da Solidariedade. </Typography>
+          </Box>
+        </Box>
+        <Box sx={{paddingLeft: '20px', height: '600px', backgroundImage: `url(${Img3})`, backgroundSize: 'cover', backgroundPositionY: '30%', display: 'flex', alignItems: 'start', justifyContent: 'start'}}>
+        <Box sx={{width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
+            <Typography variant="h3" color={theme.palette.text.green} sx={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontWeight: 'bolder', textAlign: 'left'}}>Bazar</Typography>
+            <Typography variant="h5" color={theme.palette.text.yellow} sx={{textAlign: 'left'}}>O Bazar Amigos da Casa é uma importante fonte de recurso da instituição.</Typography>
+            <Typography variant="h5" color={theme.palette.text.yellow} sx={{textAlign: 'left'}}>Apoie com a doação de roupas, calçados e acessórios novos para a nossa loja. </Typography>
+          </Box>
+        </Box>
       </Carousel>
+
       <Cards />
       <Box sx={{backgroundImage: `url(${BannerFuncrianca})`, backgroundSize: 'cover', backgroundPositionY: '50%', backgroundPositionX: '50%', height: '450px'}}>
         <Typography variant="h2" >

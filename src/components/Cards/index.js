@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Button, CardActions, Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Button, CardActions, Box, Card, CardContent, CardMedia, Typography, Dialog, DialogContent } from '@mui/material';
 import axios from 'axios';
 import { useTheme } from '@mui/material';
 
 import PaginaCampanha from '../PaginaCampanha/PaginaCampanha'
+import FormDoacao from '../FormDoacao/FormDoacao';
 
 function Cards() {
     const [campanhas, setCampanhas] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false); // New state for dialog
     const [currentData, setCurrentData] = useState(null);
     const theme = useTheme();
 
@@ -20,7 +22,6 @@ function Cards() {
         } catch (error) {
             console.log(error);
         }
-
     }, []);
 
     const handleOpenModal = (data) => {
@@ -33,14 +34,20 @@ function Cards() {
         setOpenModal(false);
     };
 
-
-
+    const handleOpenDialog = (id) => {
+        setOpenDialog(id);
+    };
+    
+    const handleCloseDialog = () => {
+        setOpenDialog(null);
+    };
 
     return (
         <>
             <Typography color={theme.palette.text.green} variant='h3' sx={{textAlign: 'center'}}>Conheça e apoie nossos projetos</Typography>
             <Box sx={{ width: "100%", display: "flex", gap: "15px", flexWrap: "wrap", justifyContent: 'center', marginBottom: '50px' }}>
                 {campanhas.map((data) => (
+                    <>
                     <Card sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} elevation={0} key={data.attributes.id}>
                         <CardContent sx={{ maxWidth: "350px", display: "flex", flexDirection: "column" }}>
                             <CardMedia
@@ -56,17 +63,31 @@ function Cards() {
                             <Typography variant="body1" >{data.attributes.descricao}</Typography>
                         </CardContent>
                         <CardActions sx={{ display: "flex" }}>
-                            <Button sx={{ padding: "10px" }} variant="contained" size="small" color="primary">
+                            <Button sx={{ padding: "10px" }} variant="contained" size="small" color="primary" onClick={() => handleOpenModal(data)}>
                                 Saiba mais
                             </Button>
-                            <Button sx={{ padding: "10px" }} variant="contained" size="small" color="primary">
-                                Doe Agora!
-                            </Button>
+                            <Button 
+                            sx={{ padding: "10px" }} 
+                            variant="contained" 
+                            size="small" 
+                            color="primary" 
+                            onClick={() => handleOpenDialog(data.attributes.id)}>
+                            Doe Agora!
+                        </Button>
                         </CardActions>
                     </Card>
+                    {openDialog === data.attributes.id && (
+                        <Dialog open onClose={handleCloseDialog} aria-labelledby="form-dialog-title">
+                            <DialogContent>
+                                <FormDoacao fundo={data.attributes.id_campanha} />
+                            </DialogContent>
+                        </Dialog>
+                    )}
+                </>
                 ))}
                 <PaginaCampanha open={openModal} onClose={handleCloseModal} data={currentData} />
             </Box>
+            
         </>
 
     )

@@ -1,27 +1,19 @@
-import { Box, Button, Link, Container } from "@mui/material";
-import ModalPagamento from "../ModalPagamento";
-import { useState } from "react";
-import Facebook from "../../assets/icons/facebook.png";
-import Instagram from "../../assets/icons/instagram.png";
-import Twitter from "../../assets/icons/twitter.png";
-import TikTok from "../../assets/icons/tik-tok.png";
-import WhatsApp from "../../assets/icons/whatsapp.png";
-import YouTube from "../../assets/icons/youtube.png";
+import React, { useState } from "react";
+import { Box, Button, Link, Container, Dialog, DialogTitle, DialogContent } from "@mui/material";
+import FormDoacao from "../FormDoacao/FormDoacao";
 
 import LogoMain from "../../assets/LOGOS/AJUSTADOS/logo_horizontal_adc.png";
 import LogoCMJP from "../../assets/LOGOS/AJUSTADOS/logo_horizontal_cmjp.png";
 
-import { Alert } from "@coreui/react";
-
 function HeaderFixed() {
-  const [openModal, setOpenModal] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  const handleOpen = () => {
+    setOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -67,12 +59,17 @@ function HeaderFixed() {
             variant="contained"
             size="small"
             color="primary"
-            // onClick={handleOpenModal}
+            onClick={handleOpen}
           >
             Doar
           </Button>
-
-          <ModalPagamento open={openModal} onClose={handleCloseModal} />
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Doação</DialogTitle>
+            <DialogContent>
+              <FormDoacao fundo="geral" />
+            </DialogContent>
+          </Dialog>
+          
         </Box>
       </Box>
     </Container>
