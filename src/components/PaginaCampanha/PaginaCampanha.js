@@ -29,13 +29,13 @@ const PaginaCampanha = ({ open, onClose, data }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <img src={data?`https://strapi-production-c201.up.railway.app${data.attributes.imagem.data.attributes.url}`:'Carregando'}/>
+            <img width='350px' src={data?`https://strapi-production-c201.up.railway.app${data.attributes.imagem.data.attributes.url}`:'Carregando'}/>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {data ? data.attributes.titulo : "Carregando..."} {/* Exemplo de como exibir o título */}
+            {data ? data.attributes.titulo : "Carregando..."}
           </Typography>
           
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {data ? data.attributes.descricao : "Carregando..."} {/* Exemplo de como exibir a descrição */}
+            {data ? data.attributes.descricao : "Carregando..."}
           </Typography>
 
           <ReactMarkdown>{data ? data.attributes.texto_longo : "Carregando..."}</ReactMarkdown>

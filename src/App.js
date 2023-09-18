@@ -11,6 +11,7 @@ import UserContext from "./components/Context";
 
 import Header from "./components/Header";
 import ModalPagamento from "./components/ModalPagamento";
+import BannerParceiros from "./components/BannerParceiros/BannerParceiros";
 
 import { Container, Typography, Box, Button } from "@mui/material";
 
@@ -111,7 +112,7 @@ const App = () => {
         <Box>
           <img src={BannerCriancas} alt="Banner Crianças" width="100%" />
         </Box>
-
+        <BannerParceiros />
         <Box
           sx={{ background: theme.palette.background.dark, padding: "60px 0" }}
         >
@@ -122,6 +123,7 @@ const App = () => {
               gap: "30px",
             }}
           >
+            
             <Box
               sx={{
                 width: { sx: "100%", md: "50%" },
@@ -146,6 +148,7 @@ const App = () => {
                 <img width="100%" src={LogoAmigosDaCasaVertical} alt="" />
               </Box>
             </Box>
+            
             <Box
               sx={{
                 width: { sx: "100%", md: "50%" },
@@ -178,6 +181,7 @@ const App = () => {
             </Box>
           </Container>
         </Box>
+        
         {/* <Box sx={{ background: theme.palette.text.dark, padding: "10px 0" }}>
           <Container
             sx={{

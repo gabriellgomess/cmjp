@@ -34,12 +34,14 @@ function Cards() {
         setOpenModal(false);
     };
 
-    const handleOpenDialog = (id) => {
-        setOpenDialog(id);
+    const handleOpenDialog = (data) => {
+        setCurrentData(data);
+        setOpenDialog(true);
     };
     
     const handleCloseDialog = () => {
-        setOpenDialog(null);
+        setCurrentData(null);
+        setOpenDialog(false);
     };
 
     return (
@@ -67,24 +69,25 @@ function Cards() {
                                 Saiba mais
                             </Button>
                             <Button 
-                            sx={{ padding: "10px" }} 
-                            variant="contained" 
-                            size="small" 
-                            color="primary" 
-                            onClick={() => handleOpenDialog(data.attributes.id)}>
-                            Doe Agora!
-                        </Button>
+                                sx={{ padding: "10px" }} 
+                                variant="contained" 
+                                size="small" 
+                                color="primary" 
+                                onClick={() => handleOpenDialog(data)}>
+                                Doe Agora!
+                            </Button>
                         </CardActions>
                     </Card>
-                    {openDialog === data.attributes.id && (
-                        <Dialog open onClose={handleCloseDialog} aria-labelledby="form-dialog-title">
-                            <DialogContent>
-                                <FormDoacao fundo={data.attributes.id_campanha} />
-                            </DialogContent>
-                        </Dialog>
-                    )}
+                  
                 </>
                 ))}
+                {openDialog && (
+                    <Dialog open={openDialog} onClose={handleCloseDialog} aria-labelledby="form-dialog-title">
+                        <DialogContent>
+                            <FormDoacao fundo={currentData?.attributes.id_campanha} />
+                        </DialogContent>
+                    </Dialog>
+                )}
                 <PaginaCampanha open={openModal} onClose={handleCloseModal} data={currentData} />
             </Box>
             

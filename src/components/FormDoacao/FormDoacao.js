@@ -115,7 +115,7 @@ const FormDoacao = ({fundo}) => {
     }
     return (
         <form style={{ display: "flex", justifyContent: "center", marginTop: "20px" }} onSubmit={handleSubmit(onSubmit)}>
-        <p>{fundo}</p>
+        
       <Box sx={{ width: { xs: "100%", sm: "100%", md: "100%" }, display: "flex", flexDirection: "column", gap: "15px" }}>
         
         {/* Informações básicas */}
