@@ -1,5 +1,6 @@
 import HeaderFixed from "../HeaderFixed";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import MyContext from "../Context";
 import AdbIcon from "@mui/icons-material/Adb";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
@@ -18,6 +19,7 @@ import { Link } from "react-router-dom";
 import LogoGrey from "../../assets/grey_scale.png";
 import { styled, alpha } from "@mui/material/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import DialogComoAjudar from "../DialogComoAjudar/DialogComoAjudar";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -66,6 +68,23 @@ function Header() {
   const [isFixed, setIsFixed] = useState(false);
 
   const [expanded, setExpanded] = React.useState(false);
+
+  const { comoApoiar, setComoApoiar } = useContext(MyContext);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [currentMenuItem, setCurrentMenuItem] = useState(null);
+
+  const handleOpenDialog = (item) => {
+    console.log("TESTE");
+    console.log(item);
+    setCurrentMenuItem(item);
+    setIsDialogOpen(true);
+    handleClose();
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setCurrentMenuItem(null);
+  };
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -184,36 +203,21 @@ function Header() {
                     open={open}
                     onClose={handleClose}
                   >
-                    <MenuItem onClick={handleClose} disableRipple>
-                      Doe seu imposto de renda
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} disableRipple>
-                      Eventos
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} disableRipple>
-                      Bazar Amigos da Casa
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} disableRipple>
-                      Doação por testamento
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} disableRipple>
-                      PIX
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} disableRipple>
-                      Nota fiscal gaúcha (NFG)
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} disableRipple>
-                      Tampinha Legal
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} disableRipple>
-                      Lei do Esporte
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} disableRipple>
-                      Lei Solidariedade
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} disableRipple>
-                      Outras formas de colaborar
-                    </MenuItem>
+                    {comoApoiar.map((item, index) => (
+                      <MenuItem
+                        key={index}
+                        onClick={() => handleOpenDialog(item)}
+                        disableRipple
+                        sx={{ display: "flex", flexDirection: "column" }}
+                      >
+                        <Typography
+                          variant="body1"
+                          sx={{ color: theme.palette.text.dark }}
+                        >
+                          {item.attributes.titulo}
+                        </Typography>
+                      </MenuItem>
+                    ))}
                   </StyledMenu>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
@@ -261,36 +265,25 @@ function Header() {
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose} disableRipple>
-                    Doe seu imposto de renda
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    Eventos
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    Bazar Amigos da Casa
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    Doação por testamento
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    PIX
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    Nota fiscal gaúcha (NFG)
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    Tampinha Legal
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    Lei do Esporte
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    Lei Solidariedade
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} disableRipple>
-                    Outras formas de colaborar
-                  </MenuItem>
+                  {comoApoiar.map((item, index) => (
+                    <MenuItem
+                      key={index}
+                      onClick={() => handleOpenDialog(item)}
+                      disableRipple
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "start",
+                      }}
+                    >
+                      <Typography
+                        variant="body1"
+                        sx={{ color: theme.palette.text.dark }}
+                      >
+                        {item.attributes.titulo}
+                      </Typography>
+                    </MenuItem>
+                  ))}
                 </StyledMenu>
               </Link>
               <Link to="/homolog/contato">
@@ -305,6 +298,12 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
+      <DialogComoAjudar
+        open={isDialogOpen}
+        handleClose={handleCloseDialog}
+        currentData={currentMenuItem}
+        theme={theme}
+      />
     </>
   );
 }

@@ -1,6 +1,6 @@
 // StateContext.js
 import  { createContext } from 'react';
 
-const UserContext = createContext({});
+const MyContext = createContext({});
 
-export default UserContext;
+export default MyContext;

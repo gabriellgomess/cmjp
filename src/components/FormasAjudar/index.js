@@ -1,15 +1,34 @@
-import React, {useState, useEffect} from "react";
-import { useTheme, Box, Container, Typography, Button, Dialog,
-  DialogContent, } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import MyContext from "../../components/Context";
+import {
+  useTheme,
+  Box,
+  Container,
+  Typography,
+  Button,
+  Dialog,
+  DialogContent,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Slide,
+} from "@mui/material";
 import axios from "axios";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
+import CloseIcon from "@mui/icons-material/Close";
+import Logo from "../../assets/LOGOS/AJUSTADOS/logoMain.png";
+import DialogComoAjudar from "../../components/DialogComoAjudar/DialogComoAjudar";
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const FormasAjudar = () => {
   const theme = useTheme();
-  const [comoApoiar, setComoApoiar] = useState([]);
+  const { comoApoiar, setComoApoiar } = useContext(MyContext);  
+  const { currentData, setCurrentData } = useContext(MyContext);
+
   const [openDialog, setOpenDialog] = useState(false);
-  const [currentData, setCurrentData] = useState(null);
 
   useEffect(() => {
     try {
@@ -19,7 +38,6 @@ const FormasAjudar = () => {
         )
         .then((response) => {
           setComoApoiar(response.data.data);
-          console.log(response.data.data);
         });
     } catch (error) {
       console.log(error);
@@ -29,11 +47,15 @@ const FormasAjudar = () => {
   const handleOpenDialog = (data) => {
     setCurrentData(data);
     setOpenDialog(true);
-    console.log(data);
+    
   };
 
   const handleCloseDialog = () => {
     setCurrentData(null);
+    setOpenDialog(false);
+  };
+
+  const handleClose = () => {
     setOpenDialog(false);
   };
   return (
@@ -51,35 +73,19 @@ const FormasAjudar = () => {
             {item.attributes.titulo}
           </Typography>
           <Typography color={theme.palette.text.dark} variant="body1">
-          {item.attributes.descricao}
-          </Typography>          
+            {item.attributes.descricao}
+          </Typography>
           <Button onClick={() => handleOpenDialog(item)}>Saiba mais</Button>
         </Box>
       ))}
       {openDialog && (
-          <Dialog
-            open={openDialog}
-            onClose={handleCloseDialog}
-            aria-labelledby="form-dialog-title"
-            fullWidth
-          >
-            <DialogContent>
-              <Typography color={theme.palette.text.dark} variant="h4">
-                {currentData.attributes.titulo}
-              </Typography>
-              <Typography color={theme.palette.text.dark} variant="body1">
-                {currentData.attributes.descricao}
-              </Typography>
-              <Box sx={{fontFamily: 'Arial'}}>
-                <ReactMarkdown>{currentData.attributes.pagina_interna}</ReactMarkdown>
-              </Box>
-              <Typography color={theme.palette.text.dark} variant="body1">
-                {currentData.attributes.link}
-              </Typography>
-              
-            </DialogContent>
-          </Dialog>
-        )}
+        <DialogComoAjudar
+          open={openDialog}
+          handleClose={handleCloseDialog}
+          currentData={currentData}
+          theme={theme}
+        />
+      )}
     </Container>
   );
 };

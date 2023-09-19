@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -7,7 +7,7 @@ import Contato from "./pages/Contato";
 import Sobre from "./pages/Sobre";
 import Backoffice from "./pages/Backoffice/Backoffice";
 
-import UserContext from "./components/Context";
+import MyContext from "./components/Context";
 
 import Header from "./components/Header";
 import ModalPagamento from "./components/ModalPagamento";
@@ -34,7 +34,10 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 const App = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);  
+
+  const [comoApoiar, setComoApoiar] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
 
   // #74c3bb verde
   // #f2a243 amarelo
@@ -79,7 +82,7 @@ const App = () => {
   });
 
   return (
-    <UserContext.Provider>
+    <MyContext.Provider value={{ open, setOpen, comoApoiar, setComoApoiar, currentData, setCurrentData }}>
       <ThemeProvider theme={theme}>
         <Header />
 
@@ -205,7 +208,7 @@ const App = () => {
           theme={theme}
         />
       </ThemeProvider>
-    </UserContext.Provider>
+    </MyContext.Provider>
   );
 };
 
