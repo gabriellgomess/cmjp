@@ -33,7 +33,7 @@ const BannerParceiros = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: "30px",
+            gap: "15px",
           }}
         >
           <img width="120px" src={agco} alt="agco" />
