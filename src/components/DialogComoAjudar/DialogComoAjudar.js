@@ -30,8 +30,7 @@ const DialogComoAjudar = ({ open, handleClose, currentData, theme }) => {
       TransitionComponent={Transition}
     >
       <AppBar sx={{ position: "relative" }}>
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <img width={350} src={Logo} alt="" />
+        <Toolbar sx={{ display: "flex", justifyContent: "end" }}>          
           <IconButton
             edge="start"
             color="inherit"
@@ -44,6 +43,10 @@ const DialogComoAjudar = ({ open, handleClose, currentData, theme }) => {
       </AppBar>
       <DialogContent>
         <Container>
+          <Box sx={{display: 'flex', justifyContent: 'end'}}>
+            <img width={350} src={Logo} alt="" />
+          </Box>
+        
           <Typography color={theme.palette.primary.main} variant="h2">
             {currentData?.attributes.titulo}
           </Typography>

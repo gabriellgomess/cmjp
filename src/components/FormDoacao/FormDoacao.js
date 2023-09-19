@@ -140,21 +140,21 @@ const FormDoacao = ({ fundo }) => {
         >
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "58%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "100%" } }}
             {...register("name")}
             label="Nome"
             required
           />
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "38%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "48%" } }}
             {...register("cpfCnpj")}
             label="CPF/CNPJ"
             required
           />
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "39%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "48%" } }}
             {...register("email")}
             label="Email"
             required
@@ -162,13 +162,13 @@ const FormDoacao = ({ fundo }) => {
 
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "28%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "48%" } }}
             {...register("phone")}
             label="Telefone"
           />
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "28%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "48%" } }}
             {...register("mobilePhone")}
             label="Celular"
             required
@@ -179,7 +179,7 @@ const FormDoacao = ({ fundo }) => {
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: "15px" }}>
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "20%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "24%" } }}
             {...register("postalCode")}
             label="CEP"
             required
@@ -192,7 +192,7 @@ const FormDoacao = ({ fundo }) => {
           />
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "55%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "73%" } }}
             {...register("address")}
             label="Endereço"
             required
@@ -210,13 +210,13 @@ const FormDoacao = ({ fundo }) => {
           />
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "20%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "30%" } }}
             {...register("complement")}
             label="Complemento"
           />
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "30%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "44%" } }}
             {...register("province")}
             label="Bairro"
             required
@@ -227,7 +227,7 @@ const FormDoacao = ({ fundo }) => {
           />
           <TextField
             size="small"
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "29%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "73%" } }}
             {...register("city")}
             label="Cidade"
             required
@@ -237,7 +237,7 @@ const FormDoacao = ({ fundo }) => {
             }
           />
           <FormControl
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "15%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "24%" } }}
           >
             <InputLabel sx={{ marginTop: "-6px" }}>Estado</InputLabel>
             <Select
@@ -302,7 +302,7 @@ const FormDoacao = ({ fundo }) => {
             InputLabelProps={{ shrink: true }}
           />
           <FormControl
-            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "28%" } }}
+            sx={{ width: { xs: "100%", sm: "100%", md: "100%", lg: "38%" } }}
           >
             <InputLabel
               sx={{ marginTop: "-6px" }}

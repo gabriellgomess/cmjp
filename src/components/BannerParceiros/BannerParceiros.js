@@ -32,21 +32,21 @@ const BannerParceiros = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "space-evenly",
             gap: "15px",
           }}
         >
-          <img width="120px" src={agco} alt="agco" />
-          <img width="120px" src={asgav} alt="asgav" />
-          <img width="120px" src={gerdau} alt="gerdau" />
-          <img width="120px" src={instituto_renner} alt="instituto_renner" />
-          <img width="120px" src={instituto_slc} alt="instituto_slc" />
-          <img width="120px" src={unimed} alt="unimed" />
-          <img width="120px" src={renner} alt="renner" />
-          <img width="120px" src={slc} alt="slc" />
-          <img width="120px" src={white_martins} alt="white_martins" />
-          <img width="120px" src={zaffari} alt="zaffari" />
-          <img width="120px" src={nexustech} alt="nexustech" />
+          <img width="100px" src={agco} alt="agco" />
+          <img width="100px" src={asgav} alt="asgav" />
+          <img width="100px" src={gerdau} alt="gerdau" />
+          <img width="100px" src={instituto_renner} alt="instituto_renner" />
+          <img width="100px" src={instituto_slc} alt="instituto_slc" />
+          <img width="100px" src={unimed} alt="unimed" />
+          <img width="100px" src={renner} alt="renner" />
+          <img width="100px" src={slc} alt="slc" />
+          <img width="100px" src={white_martins} alt="white_martins" />
+          <img width="100px" src={zaffari} alt="zaffari" />
+          <img width="100px" src={nexustech} alt="nexustech" />
         </Box>
       </Box>
     </Box>
