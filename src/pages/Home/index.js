@@ -23,8 +23,9 @@ const Home = () => {
         showArrows={true}
         infiniteLoop={true}
         autoPlay={true}
-        transitionTime={1000}
+        transitionTime={2500}
         showStatus={false}
+        interval={7000}
       >
         <Box
           sx={{
@@ -170,8 +171,13 @@ const Home = () => {
           height: "450px",
         }}
       >
-        <Typography variant="h2">Funcriança</Typography>
-        <Typography variant="body1">Provisório</Typography>
+        <Box sx={{display: 'flex', flexDirection: 'column', width: '50%', margin: '30px'}}>
+          <Typography variant="h2">Aplique parte do seu IR no melhor dos fundos: Funcriança.</Typography>
+        <Typography variant="body1">Programa federal onde pessoas físicas (que declaram pelo modelo
+              completo) e jurídicas (enquadradas no regime de lucro real) fazem
+              doações e abatem diretamente no imposto de renda devido.{" "}</Typography>
+        </Box>
+        
       </Box>
       <FormasAjudar />
     </Box>
