@@ -91,10 +91,10 @@ const App = () => {
           variant="contained"
           startIcon={<VolunteerActivismIcon />}
           sx={{
-            backgroundColor: theme.palette.background.green,
+            backgroundColor: theme.palette.background.red,
             position: "fixed",
-            top: "50%",
-            right: { xs: "80px", sm: "70px", md: "30px" },
+            top: {xs: "90%", sm: "90%", md: "50%"},
+            right: { xs: "30px", sm: "30px", md: "30px" },
             zIndex: "999",
           }}
           onClick={() => setOpen(true)}

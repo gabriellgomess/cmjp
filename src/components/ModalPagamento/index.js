@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {
@@ -10,8 +10,12 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
+  Dialog,
+  AppBar,
+  Toolbar,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import Slide from '@mui/material/Slide';
 
 import DonationForm from "./DonationForm";
 import LoginForm from "./LoginForm";
@@ -19,6 +23,10 @@ import LegalWarnings from "./LegalWarnings";
 import ContinueButton from "./ContinueButton";
 import RecurrentForm from "./RecurrentForm";
 import RegisterForm from "./RegisterForm";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const ModalPagamento = ({ open, onClose, source, theme }) => {
   // State and Handlers for Basic Information
@@ -86,18 +94,25 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
   const handleShowLogin = () => setShowRegister(false);
 
   return (
-    <Modal
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "20px",
-      }}
-      open={open}
-      onClose={onClose}
-      aria-labelledby="modal-title"
-      aria-describedby="modal-description"
-    >
+    <Dialog
+        fullScreen
+        open={open}
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={{ position: 'fixed' }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "end" }}>  
+          
+        <IconButton
+            edge="start"
+            color="inherit"
+            onClick={onClose}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+              
+          </Toolbar>
+        </AppBar>
       <Box
         sx={{
           width: { xs: "100%", md: "80%" },
@@ -106,13 +121,10 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
           p: 2,
           display: "flex",
           flexDirection: "column",
+          marginTop: "64px",
         }}
       >
-        <Box sx={{ display: "flex", justifyContent: "end" }}>
-          <IconButton onClick={onClose}>
-            <CloseIcon />
-          </IconButton>
-        </Box>
+       
         <FormControl component="fieldset">
           <RadioGroup
             row
@@ -173,7 +185,7 @@ const ModalPagamento = ({ open, onClose, source, theme }) => {
 
         <ContinueButton />
       </Box>
-    </Modal>
+    </Dialog>
   );
 };
 

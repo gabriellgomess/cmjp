@@ -18,10 +18,11 @@ const BannerParceiros = () => {
     <Box
       sx={{
         background: "#c5c4c4",
-        height: "250px",
+        height: "fit-content",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        padding: "60px 30px",
       }}
     >
       <Box>
@@ -32,8 +33,9 @@ const BannerParceiros = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-evenly",
-            gap: "15px",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "40px",
           }}
         >
           <img width="100px" src={agco} alt="agco" />

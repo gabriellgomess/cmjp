@@ -14,13 +14,13 @@ const LoginForm = ({ handleLogin, handleChangeLogin, handleShowRegister }) => {
       >
         <TextField
           name="email"
-          label="Username"
+          label="Usuário"
           onChange={(e) => handleChangeLogin(e)}
         />
         <TextField
           type="password"
           name="password"
-          label="Password"
+          label="Senha"
           onChange={(e) => handleChangeLogin(e)}
         />
         <Button variant="contained" type="submit">

@@ -9,11 +9,12 @@ import {
   DialogContent,
 } from "@mui/material";
 import FormDoacao from "../FormDoacao/FormDoacao";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 
 import LogoMain from "../../assets/LOGOS/AJUSTADOS/logo_horizontal_adc.png";
 import LogoCMJP from "../../assets/LOGOS/AJUSTADOS/logo_horizontal_cmjp.png";
 
-function HeaderFixed() {
+function HeaderFixed({theme}) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -62,14 +63,16 @@ function HeaderFixed() {
 
       <Box sx={{ display: { xs: "none", md: "flex" }, gap: "30px" }}>
         <Box sx={{ display: "flex", gap: "20px", paddingRight: "20px" }}>
-          <Button
-            sx={{ padding: "10px" }}
-            variant="contained"
-            size="small"
-            color="primary"
+        <Button
+          size="large"
+          variant="contained"
+          startIcon={<VolunteerActivismIcon />}
+          sx={{
+            backgroundColor: theme.palette.background.red,            
+          }}
             onClick={handleOpen}
           >
-            Doar
+            Quero Doar
           </Button>
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Doação</DialogTitle>
@@ -84,3 +87,5 @@ function HeaderFixed() {
 }
 
 export default HeaderFixed;
+
+

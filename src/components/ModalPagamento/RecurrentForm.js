@@ -13,19 +13,14 @@ import {
   Button,
   Tabs,
   Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
+  Dialog,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import HelpIcon from "@mui/icons-material/Help";
 import { set, useForm } from "react-hook-form";
 import axios from "axios";
 import Logo from "../../assets/LOGOS/AJUSTADOS/logoAmigosDaCasa-vertical.png";
+import TableBillings from "./TableBillings";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,6 +71,8 @@ const RecurrentForm = ({ theme }) => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [billings, setBillings] = useState([]);
   const [update, setUpdate] = useState(false);
+  const [dialogEdit, setDialogEdit] = useState(false);
+  const [contentDialogEdit, setContentDialogEdit] = useState([]);
 
   const getBillings = async () => {
     if (!theUser) return;
@@ -168,36 +165,15 @@ const RecurrentForm = ({ theme }) => {
     event.target.value = valor === "0,00" ? "" : "R$ " + valor;
   };
 
-  const statusMapping = {
-    PENDING: "Aguardando pagamento",
-    RECEIVED: "Recebida",
-    CONFIRMED: "Pagamento confirmado (saldo ainda não creditado)",
-    OVERDUE: "Vencida",
-    REFUNDED: "Estornada",
-    RECEIVED_IN_CASH: "Recebida em dinheiro (não gera saldo na conta)",
-    REFUND_REQUESTED: "Estorno Solicitado",
-    REFUND_IN_PROGRESS:
-      "Estorno em processamento (liquidação já está agendada, cobrança será estornada após executar a liquidação)",
-    CHARGEBACK_REQUESTED: "Recebido chargeback",
-    CHARGEBACK_DISPUTE:
-      "Em disputa de chargeback (caso sejam apresentados documentos para contestação)",
-    AWAITING_CHARGEBACK_REVERSAL:
-      "Disputa vencida, aguardando repasse da adquirente",
-    DUNNING_REQUESTED: "Em processo de negativação",
-    DUNNING_RECEIVED: "Recuperada",
-    AWAITING_RISK_ANALYSIS: "Pagamento em análise",
-  };
-
-  function getFriendlyStatus(status) {
-    return statusMapping[status] || "Status Desconhecido";
-  }
+ 
 
   const handleLogout = () => {
     localStorage.removeItem("loginToken"); // Remove o token de autenticação do localStorage
     setIsAuth(false); // Atualize o estado da autenticação
     // Você pode também redirecionar o usuário para a página inicial ou de login usando:
-    window.location.reload();
-  };
+    window.location.reload();  };
+
+ 
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -442,51 +418,9 @@ const RecurrentForm = ({ theme }) => {
           )}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <TableContainer component={Paper}>
-            <Table aria-label="billing table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell>Data da criação</TableCell>
-                  <TableCell>Vencimento</TableCell>
-                  <TableCell>Forma de Pagamento</TableCell>
-                  <TableCell>Valor</TableCell>
-                  <TableCell>Link</TableCell>
-                  <TableCell>Status</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {billings.map((billing) => (
-                  <TableRow key={billing.id}>
-                    <TableCell component="th" scope="row">
-                      {billing.id}
-                    </TableCell>
-                    <TableCell>
-                      {billing.dateCreated?.split("-").reverse().join("/")}
-                    </TableCell>
-                    <TableCell>
-                      {billing.dueDate?.split("-").reverse().join("/")}
-                    </TableCell>
-                    <TableCell>{billing.billingType}</TableCell>
-                    <TableCell>
-                      {billing.value?.toLocaleString("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      })}
-                    </TableCell>
-                    <TableCell>
-                      <Button href={billing.invoiceUrl} target="blank">
-                        Link
-                      </Button>
-                    </TableCell>
-                    <TableCell>{getFriendlyStatus(billing.status)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <TableBillings billings={billings} />
         </CustomTabPanel>
-      </Box>
+      </Box>      
     </Box>
   );
 };

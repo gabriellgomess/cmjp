@@ -128,7 +128,7 @@ function Header() {
 
   return (
     <>
-      <HeaderFixed />
+      <HeaderFixed theme={theme} />
       <AppBar
         position="sticky"
         top={isFixed ? "0" : "auto"}

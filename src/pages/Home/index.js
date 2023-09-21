@@ -28,111 +28,29 @@ const Home = () => {
         interval={7000}
       >
         <Box
-          sx={{
-            paddingLeft: "20px",
+          sx={{            
             height: "600px",
             backgroundImage: `url(${Img1})`,
             backgroundSize: "cover",
             backgroundPositionY: "30%",
+            backgroundPositionX: "50%",
             display: "flex",
             alignItems: "start",
             justifyContent: "start",
           }}
         >
-          <Box
+          <Box sx={{backgroundColor: '#e9434bba', width:'100%', height: '100%',paddingLeft: "20px", display: 'flex', alignItems:'center'}}>
+            <Box
             sx={{
-              width: "60%",
+              width: {xs: '100%', md: '50%'},
               display: "flex",
               flexDirection: "column",
-              alignItems: "start",
+              alignItems: "start",              
             }}
           >
-            <Typography
+             <Typography
               variant="h3"
-              color={theme.palette.text.green}
-              sx={{
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                fontWeight: "bolder",
-                textAlign: "left",
-              }}
-            >
-              Aplique parte do seu IR no melhor dos fundos: Funcriança.
-            </Typography>
-            <Typography
-              variant="h5"
-              color={theme.palette.text.yellow}
-              sx={{ textAlign: "left" }}
-            >
-              Programa federal onde pessoas físicas (que declaram pelo modelo
-              completo) e jurídicas (enquadradas no regime de lucro real) fazem
-              doações e abatem diretamente no imposto de renda devido.{" "}
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            paddingLeft: "20px",
-            height: "600px",
-            backgroundImage: `url(${Img2})`,
-            backgroundSize: "cover",
-            backgroundPositionY: "30%",
-            display: "flex",
-            alignItems: "start",
-            justifyContent: "start",
-          }}
-        >
-          <Box
-            sx={{
-              width: "50%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "start",
-            }}
-          >
-            <Typography
-              variant="h3"
-              color={theme.palette.text.green}
-              sx={{
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                fontWeight: "bolder",
-                textAlign: "left",
-              }}
-            >
-              Lei da Solidariedade
-            </Typography>
-            <Typography
-              variant="h5"
-              color={theme.palette.text.yellow}
-              sx={{ textAlign: "left" }}
-            >
-              A sua empresa pode colaborar conosco através dos incentivos
-              fiscais, via Lei da Solidariedade.{" "}
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            paddingLeft: "20px",
-            height: "600px",
-            backgroundImage: `url(${Img3})`,
-            backgroundSize: "cover",
-            backgroundPositionY: "30%",
-            display: "flex",
-            alignItems: "start",
-            justifyContent: "start",
-          }}
-        >
-          <Box
-            sx={{
-              width: "50%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "start",
-            }}
-          >
-            <Typography
-              variant="h3"
-              color={theme.palette.text.green}
+              color={theme.palette.text.light}
               sx={{
                 textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
                 fontWeight: "bolder",
@@ -143,20 +61,111 @@ const Home = () => {
             </Typography>
             <Typography
               variant="h5"
-              color={theme.palette.text.yellow}
-              sx={{ textAlign: "left" }}
+              color={theme.palette.text.dark}
+              sx={{ textAlign: "left", fontWeight: 'bold', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
             >
               O Bazar Amigos da Casa é uma importante fonte de recurso da
               instituição.
             </Typography>
             <Typography
               variant="h5"
-              color={theme.palette.text.yellow}
-              sx={{ textAlign: "left" }}
+              color={theme.palette.text.dark}
+              sx={{ textAlign: "left", fontWeight: 'bold', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
             >
               Apoie com a doação de roupas, calçados e acessórios novos para a
               nossa loja.{" "}
             </Typography>
+            
+          </Box>
+          </Box>
+          
+        </Box>
+        <Box
+          sx={{
+            
+            height: "600px",
+            backgroundImage: `url(${Img2})`,
+            backgroundSize: "cover",
+            backgroundPositionY: "30%",
+            backgroundPositionX: "50%",
+            display: "flex",
+            alignItems: "start",
+            justifyContent: "start",
+          }}
+        >
+          <Box sx={{backgroundColor: '#74c3bbb0', width:'100%', height: '100%',paddingLeft: "20px", display: 'flex', alignItems:'center'}}>
+          <Box
+            sx={{
+              width: {xs: '100%', md: '50%'},
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
+            }}
+          >
+             <Typography
+              variant="h3"
+              color={theme.palette.text.light}
+              sx={{
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                fontWeight: "bolder",
+                textAlign: "left",
+              }}
+            >
+              Aplique parte do seu IR no melhor dos fundos: Funcriança.
+            </Typography>
+            <Typography
+              variant="h5"
+              color={theme.palette.text.dark}
+              sx={{ textAlign: "left", fontWeight: 'bold', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
+            >
+              Programa federal onde pessoas físicas (que declaram pelo modelo
+              completo) e jurídicas (enquadradas no regime de lucro real) fazem
+              doações e abatem diretamente no imposto de renda devido.{" "}
+            </Typography>           
+          </Box>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            height: "600px",
+            backgroundImage: `url(${Img3})`,
+            backgroundSize: "cover",
+            backgroundPositionY: "30%",
+            backgroundPositionX: "50%",
+            display: "flex",
+            alignItems: "start",
+            justifyContent: "start",
+          }}
+        >
+          <Box sx={{backgroundColor: '#f2a24394', width:'100%', height: '100%',paddingLeft: "20px", display: 'flex', alignItems:'center'}}>
+          <Box
+            sx={{
+              width: {xs: '100%', md: '50%'},
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
+            }}
+          >
+           <Typography
+              variant="h3"
+              color={theme.palette.text.light}
+              sx={{
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                fontWeight: "bolder",
+                textAlign: "left",
+              }}
+            >
+              Lei da Solidariedade
+            </Typography>
+            <Typography
+              variant="h5"
+              color={theme.palette.text.dark}
+              sx={{ textAlign: "left", fontWeight: 'bold', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
+            >
+              A sua empresa pode colaborar conosco através dos incentivos
+              fiscais, via Lei da Solidariedade.{" "}
+            </Typography>
+          </Box>
           </Box>
         </Box>
       </Carousel>
@@ -164,15 +173,15 @@ const Home = () => {
       <Cards />
       <Box
         sx={{
-          backgroundImage: `url(${BannerFuncrianca})`,
+          backgroundImage: `url(${Img2})`,
           backgroundSize: "cover",
           backgroundPositionY: "50%",
           backgroundPositionX: "50%",
           height: "450px",
         }}
       >
-        <Box sx={{display: 'flex', flexDirection: 'column', width: '50%', margin: '30px'}}>
-          <Typography variant="h2">Aplique parte do seu IR no melhor dos fundos: Funcriança.</Typography>
+        <Box sx={{display: 'flex', flexDirection: 'column', width: {xs: '100%', md: '50%'}, padding: '20px'}}>
+          <Typography variant="h3">Aplique parte do seu IR no melhor dos fundos: Funcriança.</Typography>
         <Typography variant="body1">Programa federal onde pessoas físicas (que declaram pelo modelo
               completo) e jurídicas (enquadradas no regime de lucro real) fazem
               doações e abatem diretamente no imposto de renda devido.{" "}</Typography>

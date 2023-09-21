@@ -1,9 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Dialog from '@mui/material/Dialog';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton'
+import CloseIcon from '@mui/icons-material/Close';
+import Slide from '@mui/material/Slide';
+import FormDoacao from "../FormDoacao/FormDoacao";
+import DialogContent from '@mui/material/DialogContent';
+
 import ReactMarkdown from "react-markdown";
+
+
 
 const style = {
   position: "absolute",
@@ -12,21 +23,50 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "90%",
   height: "90%",
-  bgcolor: "background.paper",
-  boxShadow: 24,
+  bgcolor: "background.paper",  
   p: 4,
   color: "black",
 };
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+
+
+
 const PaginaCampanha = ({ open, onClose, data }) => {
+  const [openDialog, setOpenDialog] = useState(false);
+  const [currentData, setCurrentData] = useState(null);
+const handleOpenDialog = (data) => {
+  setCurrentData(data);
+  setOpenDialog(true);
+};
+
+const handleCloseDialog = () => {
+  setCurrentData(null);
+  setOpenDialog(false);
+};
   return (
     <div>
-      <Modal
+      <Dialog
+        fullScreen
         open={open}
         onClose={onClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        TransitionComponent={Transition}
       >
+         <AppBar sx={{ position: 'relative' }}>
+         <Toolbar sx={{ display: "flex", justifyContent: "end" }}> 
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={onClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>            
+          </Toolbar>
+        </AppBar>
         <Box sx={style}>
           <img
             width="350px"
@@ -47,8 +87,21 @@ const PaginaCampanha = ({ open, onClose, data }) => {
           <ReactMarkdown>
             {data ? data.attributes.texto_longo : "Carregando..."}
           </ReactMarkdown>
+
+          <Button  onClick={() => handleOpenDialog(data)} variant="contained">Quero doar</Button>
         </Box>
-      </Modal>
+      </Dialog>
+      {openDialog && (
+          <Dialog
+            open={openDialog}
+            onClose={handleCloseDialog}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogContent>
+              <FormDoacao fundo={currentData?.attributes.id_campanha} />
+            </DialogContent>
+          </Dialog>
+        )}
     </div>
   );
 };

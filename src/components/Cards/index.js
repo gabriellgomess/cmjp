@@ -104,7 +104,7 @@ function Cards() {
                   onClick={() => handleOpenModal(data)}
                   sx={{ cursor: "pointer" }}
                 />
-                <Typography variant="h5">{data.attributes.titulo}</Typography>
+                <Typography variant="h5" sx={{color: theme.palette.text.green, fontWeight: 'bold', margin: '10px 0'}}>{data.attributes.titulo}</Typography>
                 <Typography variant="body1">
                   {data.attributes.descricao}
                 </Typography>
