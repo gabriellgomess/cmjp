@@ -65,7 +65,7 @@ const App = () => {
         blue: "#90caf9",
         success: "#388e3c",
         warning: "#f57c00",
-        dark: "rgba(0, 0, 0, 0.6)",
+        dark: "#080707",
       },
       background: {
         header: "#FFFFFF",

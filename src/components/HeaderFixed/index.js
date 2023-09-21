@@ -14,6 +14,8 @@ import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import LogoMain from "../../assets/LOGOS/AJUSTADOS/logo_horizontal_adc.png";
 import LogoCMJP from "../../assets/LOGOS/AJUSTADOS/logo_horizontal_cmjp.png";
 
+import ModalPagamento from "../ModalPagamento";
+
 function HeaderFixed({theme}) {
   const [open, setOpen] = useState(false);
 
@@ -62,24 +64,24 @@ function HeaderFixed({theme}) {
       </Link>
 
       <Box sx={{ display: { xs: "none", md: "flex" }, gap: "30px" }}>
-        <Box sx={{ display: "flex", gap: "20px", paddingRight: "20px" }}>
-        <Button
+        <Box sx={{ display: "flex", gap: "20px", paddingRight: "20px" }}>        
+          <Button
           size="large"
           variant="contained"
           startIcon={<VolunteerActivismIcon />}
           sx={{
-            backgroundColor: theme.palette.background.red,            
+            backgroundColor: theme.palette.background.red,           
           }}
-            onClick={handleOpen}
-          >
-            Quero Doar
-          </Button>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Doação</DialogTitle>
-            <DialogContent>
-              <FormDoacao fundo="geral" />
-            </DialogContent>
-          </Dialog>
+          onClick={() => setOpen(true)}
+        >
+          Quero Doar
+        </Button>          
+            <ModalPagamento
+          open={open}
+          onClose={() => setOpen(false)}
+          source="geral"
+          theme={theme}
+        />
         </Box>
       </Box>
     </Container>

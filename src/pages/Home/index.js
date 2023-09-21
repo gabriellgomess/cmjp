@@ -39,7 +39,7 @@ const Home = () => {
             justifyContent: "start",
           }}
         >
-          <Box sx={{backgroundColor: '#e9434bba', width:'100%', height: '100%',paddingLeft: "20px", display: 'flex', alignItems:'center'}}>
+          <Box sx={{backgroundColor: '#e9434bcc', width:'100%', height: '100%',paddingLeft: "20px", display: 'flex', alignItems:'center'}}>
             <Box
             sx={{
               width: {xs: '100%', md: '50%'},
@@ -52,7 +52,6 @@ const Home = () => {
               variant="h3"
               color={theme.palette.text.light}
               sx={{
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
                 fontWeight: "bolder",
                 textAlign: "left",
               }}
@@ -62,7 +61,7 @@ const Home = () => {
             <Typography
               variant="h5"
               color={theme.palette.text.dark}
-              sx={{ textAlign: "left", fontWeight: 'bold', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
+              sx={{ textAlign: "left", fontWeight: 'bold'}}
             >
               O Bazar Amigos da Casa é uma importante fonte de recurso da
               instituição.
@@ -70,7 +69,7 @@ const Home = () => {
             <Typography
               variant="h5"
               color={theme.palette.text.dark}
-              sx={{ textAlign: "left", fontWeight: 'bold', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
+              sx={{ textAlign: "left", fontWeight: 'bold'}}
             >
               Apoie com a doação de roupas, calçados e acessórios novos para a
               nossa loja.{" "}
@@ -106,7 +105,6 @@ const Home = () => {
               variant="h3"
               color={theme.palette.text.light}
               sx={{
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
                 fontWeight: "bolder",
                 textAlign: "left",
               }}
@@ -116,7 +114,7 @@ const Home = () => {
             <Typography
               variant="h5"
               color={theme.palette.text.dark}
-              sx={{ textAlign: "left", fontWeight: 'bold', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
+              sx={{ textAlign: "left", fontWeight: 'bold'}}
             >
               Programa federal onde pessoas físicas (que declaram pelo modelo
               completo) e jurídicas (enquadradas no regime de lucro real) fazem
@@ -150,7 +148,6 @@ const Home = () => {
               variant="h3"
               color={theme.palette.text.light}
               sx={{
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
                 fontWeight: "bolder",
                 textAlign: "left",
               }}
@@ -160,7 +157,7 @@ const Home = () => {
             <Typography
               variant="h5"
               color={theme.palette.text.dark}
-              sx={{ textAlign: "left", fontWeight: 'bold', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
+              sx={{ textAlign: "left", fontWeight: 'bold'}}
             >
               A sua empresa pode colaborar conosco através dos incentivos
               fiscais, via Lei da Solidariedade.{" "}

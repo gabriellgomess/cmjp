@@ -1,9 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Container, TextField, Button } from "@mui/material";
 import { useTheme } from "@mui/material";
+import axios from 'axios';
+import swal from 'sweetalert';
 
 const Contato = () => {
   const theme = useTheme();
+  const [formData, setFormData] = useState({
+    nome: "",
+    email: "",
+    telefone: "",
+    mensagem: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Substitua a URL pelo endpoint do seu backend
+      await axios.post("https://amigosdacasa.org.br/gerenciador-doacoes-amigosdacasa/api_site/send_mails/envia_contato.php", formData);
+      swal("Mensagem enviada com sucesso!", "Em breve entraremos em contato.", "success");
+      setFormData({
+        nome: "",
+        email: "",
+        telefone: "",
+        mensagem: ""
+      });
+    } catch (error) {
+      alert("Ocorreu um erro ao enviar a mensagem.");
+    }
+    console.log(formData);
+  };
   return (
     <Container sx={{ marginTop: "60px", marginBottom: "60px" }}>
       <Typography variant="h3" color={theme.palette.text.green}>
@@ -61,31 +95,48 @@ const Contato = () => {
             width: "50%",
           }}
         >
-          <form
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              gap: "10px",
-            }}
-          >
-            <TextField id="outlined-basic" label="Nome" variant="standard" />
-            <TextField id="outlined-basic" label="E-mail" variant="standard" />
+         <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+            gap: "10px",
+          }}
+        >
             <TextField
-              id="outlined-basic"
-              label="Telefone"
-              variant="standard"
-            />
-            <TextField
-              id="outlined-multiline-static"
-              label="Mensagem"
-              multiline
-              rows={4}
-              variant="standard"
-            />
-            <Button variant="contained" color="primary">
-              Enviar
-            </Button>
+            name="nome"
+            label="Nome"
+            variant="standard"
+            value={formData.nome}
+            onChange={handleChange}
+          />
+          <TextField
+            name="email"
+            label="E-mail"
+            variant="standard"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <TextField
+            name="telefone"
+            label="Telefone"
+            variant="standard"
+            value={formData.telefone}
+            onChange={handleChange}
+          />
+          <TextField
+            name="mensagem"
+            label="Mensagem"
+            multiline
+            rows={4}
+            variant="standard"
+            value={formData.mensagem}
+            onChange={handleChange}
+          />
+          <Button type="submit" variant="contained" color="primary">
+            Enviar
+          </Button>
           </form>
         </Box>
       </Box>
