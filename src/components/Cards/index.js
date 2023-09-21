@@ -137,6 +137,7 @@ function Cards() {
             open={openDialog}
             onClose={handleCloseDialog}
             aria-labelledby="form-dialog-title"
+            maxWidth="lg"
           >
             <DialogContent>
               <FormDoacao fundo={currentData?.attributes.id_campanha} />

@@ -60,7 +60,7 @@ const Home = () => {
             </Typography>
             <Typography
               variant="h5"
-              color={theme.palette.text.dark}
+              color={theme.palette.text.black}
               sx={{ textAlign: "left", fontWeight: 'bold'}}
             >
               O Bazar Amigos da Casa é uma importante fonte de recurso da
@@ -68,7 +68,7 @@ const Home = () => {
             </Typography>
             <Typography
               variant="h5"
-              color={theme.palette.text.dark}
+              color={theme.palette.text.black}
               sx={{ textAlign: "left", fontWeight: 'bold'}}
             >
               Apoie com a doação de roupas, calçados e acessórios novos para a
@@ -113,7 +113,7 @@ const Home = () => {
             </Typography>
             <Typography
               variant="h5"
-              color={theme.palette.text.dark}
+              color={theme.palette.text.black}
               sx={{ textAlign: "left", fontWeight: 'bold'}}
             >
               Programa federal onde pessoas físicas (que declaram pelo modelo
@@ -156,7 +156,7 @@ const Home = () => {
             </Typography>
             <Typography
               variant="h5"
-              color={theme.palette.text.dark}
+              color={theme.palette.text.black}
               sx={{ textAlign: "left", fontWeight: 'bold'}}
             >
               A sua empresa pode colaborar conosco através dos incentivos

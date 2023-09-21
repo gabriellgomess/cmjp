@@ -10,14 +10,20 @@ import {
   InputLabel,
   Divider,
   Typography,
+  Card,
+  CardContent,
 } from "@mui/material";
 import axios from "axios";
 import swal from "sweetalert";
 
 const FormDoacao = ({ fundo }) => {
   const { register, handleSubmit, reset } = useForm();
-
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [addressData, setAddressData] = useState({});
+
+  const handlePaymentChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
 
   const onSubmit = (data) => {
     data.notificationDisabled = false;
@@ -316,6 +322,7 @@ const FormDoacao = ({ fundo }) => {
               id="demo-simple-select"
               {...register("paymentMethod", { required: true })}
               label="Forma de Pagamento"
+              onChange={handlePaymentChange}
             >
               <MenuItem value="BOLETO">Boleto</MenuItem>
               <MenuItem value="CREDIT_CARD">Cartão de crédito</MenuItem>
@@ -323,7 +330,65 @@ const FormDoacao = ({ fundo }) => {
               <MenuItem value="UNDEFINED">Cliente define</MenuItem>
             </Select>
           </FormControl>
-          {/* Adicione campos adicionais se necessário (e.g. `observations`) */}
+          {paymentMethod === "CREDIT_CARD" && (
+                        <Card
+                        width="100%"
+                        >
+                          <CardContent>
+                            <Typography variant="h6" color="primary">
+                              Dados do cartão
+                            </Typography>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                gap: "15px",
+                              }}
+                            >
+                              <TextField
+                                size="small"
+                                sx={{ width: "100%" }}
+                                label="Nome no cartão"
+                                {...register("cardName")}
+                              />
+                              <TextField
+                                size="small"
+                                sx={{ width: {xs: "100%", sm: "100%", md: "48%"} }}
+                                label="Número do cartão"
+                                {...register("cardNumber")}
+                              />
+                              
+                                <TextField
+                                  size="small"
+                                  sx={{ width: { xs:"29%", sm:"29%", md: "15%"} }}
+                                  label="Mês"
+                                  type="number"
+                                  InputProps={{
+                                    inputProps: { min: 1, max: 12 },
+                                  }}
+                                  {...register("expiryMonth")}
+                                />
+                                <TextField
+                                  size="small"
+                                  sx={{ width: { xs:"29%", sm:"29%", md: "15%"} }}
+                                  label="Ano"
+                                  type="number"
+                                  InputProps={{
+                                    inputProps: { min: 2023, max: 2050 },
+                                  }}
+                                  {...register("expiryYear")}
+                                />
+                                <TextField
+                                  size="small"
+                                  sx={{ width: { xs:"29%", sm:"29%", md: "15%"} }}
+                                  label="CVV"
+                                  {...register("ccv")}
+                                />
+                              
+                            </Box>
+                          </CardContent>
+                        </Card>
+                      )}
         </Box>
         <Button type="submit" variant="contained">
           Criar doação única

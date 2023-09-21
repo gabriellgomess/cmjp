@@ -63,9 +63,10 @@ const App = () => {
         yellow: "#f2a243",
         red: "#f44336",
         blue: "#90caf9",
+        black: "#080707",
         success: "#388e3c",
         warning: "#f57c00",
-        dark: "#080707",
+        dark: "rgba(0, 0, 0, 0.6)",
       },
       background: {
         header: "#FFFFFF",
